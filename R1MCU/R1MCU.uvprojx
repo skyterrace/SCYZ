@@ -437,16 +437,6 @@
               <FilePath>.\usr\key.c</FilePath>
             </File>
             <File>
-              <FileName>DISP.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\usr\DISP.c</FilePath>
-            </File>
-            <File>
-              <FileName>DISP_FontLib.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\usr\DISP_FontLib.c</FilePath>
-            </File>
-            <File>
               <FileName>eeprom.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\usr\eeprom.c</FilePath>
@@ -465,6 +455,16 @@
               <FileName>stepmotor.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\usr\stepmotor.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUI.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\usr\GUI.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lcd_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\usr\Lcd_Driver.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -520,11 +520,6 @@
               <FileName>stm32f10x_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\FWlib\SRC\stm32f10x_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f10x_fsmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\FWlib\SRC\stm32f10x_fsmc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_iwdg.c</FileName>

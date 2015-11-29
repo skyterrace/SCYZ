@@ -2,7 +2,7 @@
 #include "R1DEF.h"
 #include "key.h"
 #include "math.h"
-#include "DISP.h"
+#include "GUI.h"
 #include "clock_calendar.h"
 #include "stepmotor.h"
 
@@ -280,13 +280,13 @@ void R1_ExcecuteActions(void)
 			break;
 		
 		case R1_SETTING:
-			SetCurrentDateTime();
-			SetWorkingTime();
-			SetParam();
-			DispClear();
+			//SetCurrentDateTime();
+			//SetWorkingTime();
+			Gui_SetParam();
+			Gui_DispClear();
 			TIM3_Init();
 
-  		ShowDefaultScreen(sR1Mower.Power,sR1Mower.WorkMode);
+  		Gui_DrawDefaultScreen(sR1Mower.WorkMode);
 			break;
 		
 		case R1_CHARGING:

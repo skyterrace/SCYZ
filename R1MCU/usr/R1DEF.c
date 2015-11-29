@@ -44,9 +44,9 @@ void R1_Default(void)
 	sR1Mower.sRunParam.DrvSpeedL = BOX_X_COUNT;
 	
 	//sR1Mower.sRunParam.KP1 = 0.4;
-	sR1Mower.sRunParam.KP1 = BOX_X_LEN/1000.0;
+	sR1Mower.sRunParam.KP1 = BOX_X_LEN/200.0;
 	//sR1Mower.sRunParam.KD1 = 0.6;
-	sR1Mower.sRunParam.KD1 = BOX_Y_LEN/1000.0;
+	sR1Mower.sRunParam.KD1 = BOX_Y_LEN/200.0;
 	sR1Mower.sRunParam.KI1 = 0.0;
 	
 	sR1Mower.sRunParam.KP2 = 0.4;

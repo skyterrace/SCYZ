@@ -1,6 +1,6 @@
 #include "key.h"
 #include "R1DEF.h"
-#include "DISP.h"
+#include "GUI.h"
 #include "clock_calendar.h"
 
 void Key_Config()
@@ -70,7 +70,8 @@ bool key_man()
 	{
 		sR1Mower.WorkMode++;
 		if(sR1Mower.WorkMode>3)sR1Mower.WorkMode=0;
-		ShowDefaultScreen(sR1Mower.Power,sR1Mower.WorkMode);
+		//ShowDefaultScreen(sR1Mower.Power,sR1Mower.WorkMode);
+		Gui_DrawDefaultScreen(sR1Mower.WorkMode);
 	}
 
 	return ((sR1Mower.WorkMode == 1) ? TRUE : FALSE);
