@@ -28,7 +28,7 @@ void SM_Enable(unsigned char bEnabled)
 		sm_x_dir=sm_y_dir=0;
 		sm_loc_x_need=sm_loc_y_need=sm_loc_y1_need=sm_loc_y2_need=0;
 		sm_loc_arrived = 0;
-		TIM_Cmd(TIM3, ENABLE);  																							//¼ÆÊıÆ÷Ê¹ÄÜ£¬¿ªÊ¼¹¤×÷	
+		TIM_Cmd(TIM3, ENABLE);  																							//è®¡æ•°å™¨ä½¿èƒ½ï¼Œå¼€å§‹å·¥ä½œ	
 	}
 	else
 	{
@@ -197,19 +197,19 @@ void TIM3_Init(void)
 
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
   
-  TIM_TimeBaseStructure.TIM_Period = (SYSCLK/4)/(sR1Mower.sRunParam.BladeSpeed*100*2) - 1;												//×Ô¶¯×°ÔØµÄ¼ÆÊıÖµ£¬ÓÉÓÚ¼ÆÊıÊÇ´Ó0¿ªÊ¼µÄ£¬¼ÆÊı10000´ÎºóÎª9999
+  TIM_TimeBaseStructure.TIM_Period = (SYSCLK/4)/(sR1Mower.sRunParam.BladeSpeed*100*2) - 1;												//è‡ªåŠ¨è£…è½½çš„è®¡æ•°å€¼ï¼Œç”±äºè®¡æ•°æ˜¯ä»0å¼€å§‹çš„ï¼Œè®¡æ•°10000æ¬¡åä¸º9999
   
-  TIM_TimeBaseStructure.TIM_Prescaler = 3;											// Õâ¸ö¾ÍÊÇÔ¤·ÖÆµÏµÊı£¬µ±ÓÉÓÚÎª0Ê±±íÊ¾²»·ÖÆµËùÒÔÒª¼õ1
+  TIM_TimeBaseStructure.TIM_Prescaler = 3;											// è¿™ä¸ªå°±æ˜¯é¢„åˆ†é¢‘ç³»æ•°ï¼Œå½“ç”±äºä¸º0æ—¶è¡¨ç¤ºä¸åˆ†é¢‘æ‰€ä»¥è¦å‡1
 
   TIM_TimeBaseStructure.TIM_ClockDivision = 0;													
   
-  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;						//ÏòÉÏ¼ÆÊı
+  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;						//å‘ä¸Šè®¡æ•°
   
-  TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);												//³õÊ¼»¯¶¨Ê±Æ÷5
+  TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);												//åˆå§‹åŒ–å®šæ—¶å™¨5
 
-  TIM_ClearITPendingBit(TIM3, TIM_IT_Update);														//Çå³ıTIM5Òç³öÖĞ¶Ï±êÖ¾
+  TIM_ClearITPendingBit(TIM3, TIM_IT_Update);														//æ¸…é™¤TIM5æº¢å‡ºä¸­æ–­æ ‡å¿—
  
-  TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);														//´ò¿ªÒç³öÖĞ¶Ï
+  TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);														//æ‰“å¼€æº¢å‡ºä¸­æ–­
 
-//   TIM_Cmd(TIM3, ENABLE);  																							//¼ÆÊıÆ÷Ê¹ÄÜ£¬¿ªÊ¼¹¤×÷	
+//   TIM_Cmd(TIM3, ENABLE);  																							//è®¡æ•°å™¨ä½¿èƒ½ï¼Œå¼€å§‹å·¥ä½œ	
 }

@@ -9,7 +9,7 @@ void FSMC_LCD_Init(void)
   FSMC_NORSRAMTimingInitTypeDef  p;	
   GPIO_InitTypeDef GPIO_InitStructure;
   
-  //Ê¹ÄÜFSMCÍâÉèÊ±ÖÓ
+  //ä½¿èƒ½FSMCå¤–è®¾æ—¶é’Ÿ
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_FSMC, ENABLE); 
 
   
@@ -18,16 +18,16 @@ void FSMC_LCD_Init(void)
                          RCC_APB2Periph_GPIOD | RCC_APB2Periph_GPIOE , ENABLE); 	
 
   
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13; 			  //LCD±³¹â¿ØÖÆ
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13; 			  //LCDèƒŒå…‰æ§åˆ¶
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_Init(GPIOD, &GPIO_InitStructure);
 
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 ; 	 		  //LCD¸´Î»
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 ; 	 		  //LCDå¤ä½
   GPIO_Init(GPIOE, &GPIO_InitStructure);  	
   
  	
-  // ¸´ÓÃ¶Ë¿ÚÎªFSMC½Ó¿Ú
+  // å¤ç”¨ç«¯å£ä¸ºFSMCæ¥å£
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_4 | GPIO_Pin_5 |
                                 GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_14 | 
                                 GPIO_Pin_15;
@@ -45,18 +45,18 @@ void FSMC_LCD_Init(void)
 
   
   
-  //FSMC NE1  LCDÆ¬Ñ¡
+  //FSMC NE1  LCDç‰‡é€‰
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7; 
   GPIO_Init(GPIOD, &GPIO_InitStructure);
   
-  //FSMC RS---LCDÖ¸Áî Ö¸Áî/Êı¾İ	ÇĞ»»
+  //FSMC RS---LCDæŒ‡ä»¤ æŒ‡ä»¤/æ•°æ®	åˆ‡æ¢
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11 ; 
   GPIO_Init(GPIOD, &GPIO_InitStructure); 
 
-  GPIO_SetBits(GPIOD, GPIO_Pin_13);			           //LCD±³¹â´ò¿ª
+  GPIO_SetBits(GPIOD, GPIO_Pin_13);			           //LCDèƒŒå…‰æ‰“å¼€
   
   
-  //FSMC½Ó¿ÚÌØĞÔÅäÖÃ
+  //FSMCæ¥å£ç‰¹æ€§é…ç½®
   p.FSMC_AddressSetupTime = 0x02;
   p.FSMC_AddressHoldTime = 0x00;
   p.FSMC_DataSetupTime = 0x05;

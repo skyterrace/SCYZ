@@ -16,33 +16,33 @@
 #define DEBUG_MODE
 
 
-/*ÏµÍ³ÅäÖÃ±äÁ¿ºÍº¯Êı¶¨Òå*/
+/*ç³»ç»Ÿé…ç½®å˜é‡å’Œå‡½æ•°å®šä¹‰*/
 
-void RCC_Configuration(void); //ÏµÍ³Ê±ÖÓÅäÖÃ
-void NVIC_Configuration(void); //ÖĞ¶ÏÅäÖÃ
-void GPIO_Config(void); //GPIOÅäÖÃ
+void RCC_Configuration(void); //ç³»ç»Ÿæ—¶é’Ÿé…ç½®
+void NVIC_Configuration(void); //ä¸­æ–­é…ç½®
+void GPIO_Config(void); //GPIOé…ç½®
 
-/*ÏµÍ³ÅäÖÃ¶¨Òå½áÊø*/
+/*ç³»ç»Ÿé…ç½®å®šä¹‰ç»“æŸ*/
 
-/*¶¨Ê±ºÍ½ÚÅÄ±äÁ¿ºÍº¯Êı¶¨Òå*/
-uint8_t TimeSecTick=0; //ÃëÖĞ¶Ï±êÖ¾£¬=1ÔòÃëÖĞ¶Ï·¢Éú
-/*¶¨Ê±ºÍ½ÚÅÄ±äÁ¿ºÍº¯Êı¶¨Òå½áÊø*/
+/*å®šæ—¶å’ŒèŠ‚æ‹å˜é‡å’Œå‡½æ•°å®šä¹‰*/
+uint8_t TimeSecTick=0; //ç§’ä¸­æ–­æ ‡å¿—ï¼Œ=1åˆ™ç§’ä¸­æ–­å‘ç”Ÿ
+/*å®šæ—¶å’ŒèŠ‚æ‹å˜é‡å’Œå‡½æ•°å®šä¹‰ç»“æŸ*/
 
-/*´®¿Ú²Ù×÷±äÁ¿ºÍº¯Êı¶¨Òå*/
+/*ä¸²å£æ“ä½œå˜é‡å’Œå‡½æ•°å®šä¹‰*/
 
-// uint8_t TxBuffer1[30], RxBuffer1[30]; //´®¿Ú1»º³åÇø
-// uint8_t rec_f; //´®¿Ú1½ÓÊÕ±êÖ¾£¬½ÓÊÕµ½Êı¾İÔòÎª1
+// uint8_t TxBuffer1[30], RxBuffer1[30]; //ä¸²å£1ç¼“å†²åŒº
+// uint8_t rec_f; //ä¸²å£1æ¥æ”¶æ ‡å¿—ï¼Œæ¥æ”¶åˆ°æ•°æ®åˆ™ä¸º1
 
-/*´®¿Ú²Ù×÷±äÁ¿ºÍº¯Êı¶¨Òå½áÊø*/
-
-
-/*ÆäËû±äÁ¿ºÍº¯Êı¶¨Òå*/
+/*ä¸²å£æ“ä½œå˜é‡å’Œå‡½æ•°å®šä¹‰ç»“æŸ*/
 
 
+/*å…¶ä»–å˜é‡å’Œå‡½æ•°å®šä¹‰*/
 
-//extern char strbuff[]; //ÏÔÊ¾»º³åÇø£¬ÔÚDISP.cÖĞ¶¨Òå
 
-/*ÆäËû±äÁ¿ºÍº¯Êı¶¨Òå½áÊø*/
+
+//extern char strbuff[]; //æ˜¾ç¤ºç¼“å†²åŒºï¼Œåœ¨DISP.cä¸­å®šä¹‰
+
+/*å…¶ä»–å˜é‡å’Œå‡½æ•°å®šä¹‰ç»“æŸ*/
 
 void TIM3_Init(void);
 
@@ -57,27 +57,27 @@ int main(void)
 	
 	Key_Config();
 
-	//¿´ÃÅ¹·³õÊ¼»¯
-	if(RCC_GetFlagStatus(RCC_FLAG_IWDGRST)!=RESET)  //Èç¹ûÉÏ´ÎµÄ¸´Î»ÊÇ¿´ÃÅ¸´Î»µÄ»°
+	//çœ‹é—¨ç‹—åˆå§‹åŒ–
+	if(RCC_GetFlagStatus(RCC_FLAG_IWDGRST)!=RESET)  //å¦‚æœä¸Šæ¬¡çš„å¤ä½æ˜¯çœ‹é—¨å¤ä½çš„è¯
 	{
 // 		SetMowSpeed(0);
 // 		SetDriverSpeed(0,0);
 		//ShowStatusInfo(3,0,"Watch Dog!");
-		Gui_DrawFont_GBK32(16,6,BLUE,GRAY0,"³¤¶È£º");  //ÏÔÊ¾
-		//RCC_ClearFlag(); //ºóÃæRTC_ConfigurationÀï»áÇå¼Ä´æÆ÷
+		Gui_DrawFont_GBK32(16,6,BLUE,GRAY0,"é•¿åº¦ï¼š");  //æ˜¾ç¤º
+		//RCC_ClearFlag(); //åé¢RTC_Configurationé‡Œä¼šæ¸…å¯„å­˜å™¨
 		//while(!Key_Press(KEY_OK));
 		Delay_ms(3000);
 	}
-	/* Ğ´Èë0x5555,ÓÃÓÚÔÊĞí¹·¹·¼Ä´æÆ÷Ğ´Èë¹¦ÄÜ */
+	/* å†™å…¥0x5555,ç”¨äºå…è®¸ç‹—ç‹—å¯„å­˜å™¨å†™å…¥åŠŸèƒ½ */
 	IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);
-	/* ¹·¹·Ê±ÖÓ·ÖÆµ,40K/256=156HZ(6.4ms)*/
+	/* ç‹—ç‹—æ—¶é’Ÿåˆ†é¢‘,40K/256=156HZ(6.4ms)*/
 	IWDG_SetPrescaler(IWDG_Prescaler_256);
-	/* Î¹¹·Ê±¼ä 5s/6.4MS=781 .×¢Òâ²»ÄÜ´óÓÚ0xfff*/
+	/* å–‚ç‹—æ—¶é—´ 5s/6.4MS=781 .æ³¨æ„ä¸èƒ½å¤§äº0xfff*/
 	IWDG_SetReload(781);
 	
-	/* Î¹¹·*/
+	/* å–‚ç‹—*/
 	IWDG_ReloadCounter();
-	/* Ê¹ÄÜ¹·¹·*/
+	/* ä½¿èƒ½ç‹—ç‹—*/
  	IWDG_Enable();
 	
   /* Unlock the Flash Program Erase controller */
@@ -86,7 +86,7 @@ int main(void)
   /* EEPROM Init */
   EE_Init();
 	R1_Default();
-	RTC_Configuration();  //Èç¹ûÃ»ÓĞÅäÖÃ¹ıÊ±ÖÓ£¬»á½«R1 DefaultÖµ±£´æµ½EERomÀï£¬ËùÒÔÒª·ÅÔÚR1_Defaultº¯ÊıºóÃæ¡£
+	RTC_Configuration();  //å¦‚æœæ²¡æœ‰é…ç½®è¿‡æ—¶é’Ÿï¼Œä¼šå°†R1 Defaultå€¼ä¿å­˜åˆ°EERomé‡Œï¼Œæ‰€ä»¥è¦æ”¾åœ¨R1_Defaultå‡½æ•°åé¢ã€‚
 	EE_LoadWorkingTime();
 	EE_LoadParams();
 
@@ -97,23 +97,23 @@ int main(void)
 	SM_Enable(0);
 	SM_SetZero(0,0);
 	
-	GPIO_ResetBits(GPIOA,GPIO_Pin_3);   //Çå³ıÍ¶¶ü¼ÌµçÆ÷
+	GPIO_ResetBits(GPIOA,GPIO_Pin_3);   //æ¸…é™¤æŠ•é¥µç»§ç”µå™¨
 	sm_box_all_arrived = 0;
 	
-	Gui_DrawDefaultScreen(sR1Mower.WorkMode);  //ÏÔÊ¾
+	Gui_DrawDefaultScreen(sR1Mower.WorkMode);  //æ˜¾ç¤º
 
 	while(1)
 	{
 	
-		IWDG_ReloadCounter(); //Î¹¹·
+		IWDG_ReloadCounter(); //å–‚ç‹—
 		
 		
-		//µ÷ÊÔ´úÂë
+		//è°ƒè¯•ä»£ç 
 // 		Delay_ms(1000);
 // 		if(Key_Press(KEY_OK)) sR1Mower.BSStrength[0] = sR1Mower.BSStrength[1] = 30;
 // 		else sR1Mower.BSStrength[0] = sR1Mower.BSStrength[1] = 1;
 		
-		//µ÷ÊÔ´úÂë½áÊø
+		//è°ƒè¯•ä»£ç ç»“æŸ
 		
 // 		if(sR1Mower.WorkMode == 2)
 // 		{
@@ -123,7 +123,7 @@ int main(void)
 // 		{
 // 			GPIO_ResetBits(GPIOA,GPIO_Pin_3);
 // 		}
-		//ÔÚC0ÉÏÊä³öÒ»¸ö·½²¨£¬´ú±íÔËĞĞÖÜÆÚ
+		//åœ¨C0ä¸Šè¾“å‡ºä¸€ä¸ªæ–¹æ³¢ï¼Œä»£è¡¨è¿è¡Œå‘¨æœŸ
 // 		if(GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_0) == 0) GPIO_SetBits(GPIOC,GPIO_Pin_0);
 // 		else GPIO_ResetBits(GPIOC,GPIO_Pin_0);
 		
@@ -153,48 +153,48 @@ int main(void)
 		}
  			
 			//if(DEBUG_MODE)
-			//ÏÔÊ¾½çÃæĞÅÏ¢
+			//æ˜¾ç¤ºç•Œé¢ä¿¡æ¯
 			{
 				unsigned char *st;
 				switch (sR1Mower.MCU_STATUS)
 				{
-					case  R1_STOP:  //Í£Ö¹×´Ì¬
+					case  R1_STOP:  //åœæ­¢çŠ¶æ€
 						st="STOP  ";
 						break;
-					case R1_CHARGING: //³äµç×´Ì¬
+					case R1_CHARGING: //å……ç”µçŠ¶æ€
 						st="CHARGE";
 						break;
-					case R1_SETTING: //Ê±¼äÉè¶¨×´Ì¬
+					case R1_SETTING: //æ—¶é—´è®¾å®šçŠ¶æ€
 						st="SETTING";
 						break;
-					case R1_MANUAL: //ÊÖ¶¯¿ØÖÆ×´Ì¬
+					case R1_MANUAL: //æ‰‹åŠ¨æ§åˆ¶çŠ¶æ€
 						st="MANUAL";
 						break;
-					case R1_MOW: //¸î²İ×´Ì¬
+					case R1_MOW: //å‰²è‰çŠ¶æ€
 						st="MOVING";
 						break;
-					case R1_AVOID: //±ÜÕÏ×´Ì¬
+					case R1_AVOID: //é¿éšœçŠ¶æ€
 						st="AVOID ";
 						break;
-					case R1_TURN: //µ÷Í·×´Ì¬
+					case R1_TURN: //è°ƒå¤´çŠ¶æ€
 						st="TURN  ";
 						break;
-					case R1_FAIL: //¹ÊÕÏÍ£Ö¹×´Ì¬
+					case R1_FAIL: //æ•…éšœåœæ­¢çŠ¶æ€
 						st="FAIL  ";
 						break;
-					case R1_LOOK: //Ñ°ÕÒµ¼ÒıÏß×´Ì¬
+					case R1_LOOK: //å¯»æ‰¾å¯¼å¼•çº¿çŠ¶æ€
 						st="HOME  ";
 						break;
-					case R1_FOLLOW: //ÑØµ¼Ïß×ß×´Ì¬
+					case R1_FOLLOW: //æ²¿å¯¼çº¿èµ°çŠ¶æ€
 						st="FOLLOW";
 						break;
-					case R1_GOOUT: //ÑØµ¼Ïß×ß×´Ì¬
+					case R1_GOOUT: //æ²¿å¯¼çº¿èµ°çŠ¶æ€
 						st="GO OUT";
 						break;
-					case R1_IDLE: //ÑØµ¼Ïß×ß×´Ì¬
+					case R1_IDLE: //æ²¿å¯¼çº¿èµ°çŠ¶æ€
 						st="IDLE  ";
 						break;
-					case R1_PREPARE: //ÑØµ¼Ïß×ß×´Ì¬
+					case R1_PREPARE: //æ²¿å¯¼çº¿èµ°çŠ¶æ€
 						st="PREPAR";
 						break;
 					default:
@@ -205,14 +205,14 @@ int main(void)
 				if(!R1_has_fail())
 				{
 					//ShowStatusInfo(2,0,"WORK: ");
-					Gui_DrawFont_GBK16(16,6,BLUE,GRAY0,st);  //ÏÔÊ¾
+					Gui_DrawFont_GBK16(16,6,BLUE,GRAY0,st);  //æ˜¾ç¤º
 					//ShowBatteryInfo(sR1Mower.Power);
 				}
 				else
 				{
 					//ShowStatusInfo(2,0,"ERROR:");
 					//ShowStatusInfo(3,0,sR1Mower.FailInfo);
-					Gui_DrawFont_GBK16(16,6,BLUE,GRAY0,"ERROR");  //ÏÔÊ¾
+					Gui_DrawFont_GBK16(16,6,BLUE,GRAY0,"ERROR");  //æ˜¾ç¤º
 				}
 				
 #ifdef DEBUG_MODE
@@ -225,7 +225,7 @@ int main(void)
 //				ShowStatusInfo(3,12,strbuff);
 
 				//ShowStatusInfo(4,0,"X:");
-				Gui_DrawFont_GBK16(16,24,BLUE,GRAY0,"X:");  //ÏÔÊ¾
+				Gui_DrawFont_GBK16(16,24,BLUE,GRAY0,"X:");  //æ˜¾ç¤º
 				
 //				sR1Mower.MT_STATUS_H = sm_loc_x>>24;
 //				ShowDebugInfo(4,3,sR1Mower.MT_STATUS_H);
@@ -250,7 +250,7 @@ int main(void)
 // 				ShowDebugInfo(5,15,sR1Mower.BSStrength[1] & 0x00FF);
 // 				//ShowDebugInfo(5,15,sR1Mower.BSStrength[1]>>2 & 0x00FF);
 				//ShowStatusInfo(5,0,"Y:");
-				Gui_DrawFont_GBK16(16,40,BLUE,GRAY0,"Y:");  //ÏÔÊ¾
+				Gui_DrawFont_GBK16(16,40,BLUE,GRAY0,"Y:");  //æ˜¾ç¤º
 //				ShowDebugInfo(5,3,sm_loc_y>>24);
 //				ShowDebugInfo(5,6,sm_loc_y>>16);
 //				ShowDebugInfo(5,9,sm_loc_y>>8);
@@ -275,7 +275,7 @@ int main(void)
 //				ShowStatusInfo(6,0,"Box:");
 //				ShowDebugInfo(6,6,sm_box_loc_x);
 //				ShowDebugInfo(6,10,sm_box_loc_y);
-					Gui_DrawFont_GBK16(16,56,BLUE,GRAY0,"BOX:");  //ÏÔÊ¾
+					Gui_DrawFont_GBK16(16,56,BLUE,GRAY0,"BOX:");  //æ˜¾ç¤º
 					Gui_DrawFont_Num32_Int(80,56,RED,GRAY0,sm_box_loc_x,2);	
 					Gui_DrawFont_Num32_Int(144,56,RED,GRAY0,sm_box_loc_y,2);	
 					
@@ -292,10 +292,10 @@ void RCC_Configuration(void)
 { 
         RCC_DeInit();
 
-//        SystemInit();//Ô´×Ôsystem_stm32f10x.cÎÄ¼ş,Ö»ĞèÒªµ÷ÓÃ´Ëº¯Êı,Ôò¿ÉÍê³ÉRCCµÄÅäÖÃ.¾ßÌåÇë¿´2_RCC
+//        SystemInit();//æºè‡ªsystem_stm32f10x.cæ–‡ä»¶,åªéœ€è¦è°ƒç”¨æ­¤å‡½æ•°,åˆ™å¯å®ŒæˆRCCçš„é…ç½®.å…·ä½“è¯·çœ‹2_RCC
         RCC_HSEConfig(RCC_HSE_OFF);
 
-        RCC_HSICmd(ENABLE);                        //´ò¿ªÄÚ²¿Ê±ÖÓ
+        RCC_HSICmd(ENABLE);                        //æ‰“å¼€å†…éƒ¨æ—¶é’Ÿ
         
         while(RCC_GetFlagStatus(RCC_FLAG_HSIRDY) == RESET)        
         {        
@@ -310,11 +310,11 @@ void RCC_Configuration(void)
         RCC_PCLK2Config(RCC_HCLK_Div1);
         //APB1
         RCC_PCLK1Config(RCC_HCLK_Div1);
-        //PLL ±¶Æµ
-        RCC_PLLConfig(RCC_PLLSource_HSI_Div2, RCC_PLLMul_12);        //ÄÚ²¿Ê±ÖÓ±¶Æµ*16
-        RCC_PLLCmd(ENABLE);                        //Ê¹ÄÜ±¶Æµ
+        //PLL å€é¢‘
+        RCC_PLLConfig(RCC_PLLSource_HSI_Div2, RCC_PLLMul_12);        //å†…éƒ¨æ—¶é’Ÿå€é¢‘*16
+        RCC_PLLCmd(ENABLE);                        //ä½¿èƒ½å€é¢‘
                                                                                                          
-				//µÈ´ıÖ¸¶¨µÄ RCC ±êÖ¾Î»ÉèÖÃ³É¹¦ µÈ´ıPLL³õÊ¼»¯³É¹¦
+				//ç­‰å¾…æŒ‡å®šçš„ RCC æ ‡å¿—ä½è®¾ç½®æˆåŠŸ ç­‰å¾…PLLåˆå§‹åŒ–æˆåŠŸ
         while(RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)
         {
         }
@@ -322,9 +322,9 @@ void RCC_Configuration(void)
         RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);        
 
         /**************************************************
-        »ñÈ¡RCCµÄĞÅÏ¢,µ÷ÊÔÓÃ
-        Çë²Î¿¼RCC_ClocksTypeDef½á¹¹ÌåµÄÄÚÈİ,µ±Ê±ÖÓÅäÖÃÍê³Éºó,
-        ÀïÃæ±äÁ¿µÄÖµ¾ÍÖ±½Ó·´Ó³ÁËÆ÷¼ş¸÷¸ö²¿·ÖµÄÔËĞĞÆµÂÊ
+        è·å–RCCçš„ä¿¡æ¯,è°ƒè¯•ç”¨
+        è¯·å‚è€ƒRCC_ClocksTypeDefç»“æ„ä½“çš„å†…å®¹,å½“æ—¶é’Ÿé…ç½®å®Œæˆå,
+        é‡Œé¢å˜é‡çš„å€¼å°±ç›´æ¥åæ˜ äº†å™¨ä»¶å„ä¸ªéƒ¨åˆ†çš„è¿è¡Œé¢‘ç‡
         ***************************************************/
                 
         while(RCC_GetSYSCLKSource() != 0x08){}
@@ -336,25 +336,25 @@ void NVIC_Configuration(void)
 
   /* Configure the NVIC Preemption Priority Bits */  
   /* Configure one bit for preemption priority */
-  /* ÓÅÏÈ¼¶×é ËµÃ÷ÁËÇÀÕ¼ÓÅÏÈ¼¶ËùÓÃµÄÎ»Êı£¬ºÍ×ÓÓÅÏÈ¼¶ËùÓÃµÄÎ»Êı   ÔÚÕâÀïÊÇ1£¬ 7 */    
+  /* ä¼˜å…ˆçº§ç»„ è¯´æ˜äº†æŠ¢å ä¼˜å…ˆçº§æ‰€ç”¨çš„ä½æ•°ï¼Œå’Œå­ä¼˜å…ˆçº§æ‰€ç”¨çš„ä½æ•°   åœ¨è¿™é‡Œæ˜¯1ï¼Œ 7 */    
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);		   
   
 
 	  /* Enable the RTC Interrupt */
-  NVIC_InitStructure.NVIC_IRQChannel = RTC_IRQn;					//ÅäÖÃÍâ²¿ÖĞ¶ÏÔ´£¨ÃëÖĞ¶Ï£© 
+  NVIC_InitStructure.NVIC_IRQChannel = RTC_IRQn;					//é…ç½®å¤–éƒ¨ä¸­æ–­æºï¼ˆç§’ä¸­æ–­ï¼‰ 
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 7;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);  
 	
 
-	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;												//Ö¸¶¨ÖĞ¶ÏÔ´
+	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;												//æŒ‡å®šä¸­æ–­æº
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;							
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;										//Ö¸¶¨ÏìÓ¦ÓÅÏÈ¼¶±ğ
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;										//æŒ‡å®šå“åº”ä¼˜å…ˆçº§åˆ«
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;	
 	NVIC_Init(&NVIC_InitStructure); 
 	
-	if (SysTick_Config(SYSCLK/100000))		   //Ê±ÖÓ½ÚÅÄÖĞ¶ÏÊ±10usÒ»´Î  ÓÃÓÚ¶¨Ê±¡£ Ê±ÖÓÆµÂÊ48MHz£¬/480£¬Ôò10usÒ»´Î
+	if (SysTick_Config(SYSCLK/100000))		   //æ—¶é’ŸèŠ‚æ‹ä¸­æ–­æ—¶10usä¸€æ¬¡  ç”¨äºå®šæ—¶ã€‚ æ—¶é’Ÿé¢‘ç‡48MHzï¼Œ/480ï¼Œåˆ™10usä¸€æ¬¡
   { 
     /* Capture error */ 
     while (1);
@@ -365,23 +365,23 @@ void GPIO_Config(void){
 	GPIO_InitTypeDef GPIO_InitStructure;
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC | RCC_APB2Periph_GPIOD, ENABLE);	
 
-	//ÅäÖÃPA3ÎªÇı¶¯µçÔ´¿ª¹ØÏß
+	//é…ç½®PA3ä¸ºé©±åŠ¨ç”µæºå¼€å…³çº¿
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;				     
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;			 //¿ÚÏß·­×ªËÙ¶ÈÎª50MHz
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;			 //å£çº¿ç¿»è½¬é€Ÿåº¦ä¸º50MHz
   GPIO_Init(GPIOA, &GPIO_InitStructure);	
 	
 	
-	//ÅäÖÃ²½½øµç»úÊä³öÏß
+	//é…ç½®æ­¥è¿›ç”µæœºè¾“å‡ºçº¿
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1|GPIO_Pin_2|GPIO_Pin_3;				 //AIN1,AIN2,AIN3	
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;			 //¿ÚÏß·­×ªËÙ¶ÈÎª50MHz
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;			 //å£çº¿ç¿»è½¬é€Ÿåº¦ä¸º50MHz
   GPIO_Init(GPIOC, &GPIO_InitStructure);	
 	
 	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1|GPIO_Pin_2;			//AIN5,AIN6	     
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;			 //¿ÚÏß·­×ªËÙ¶ÈÎª50MHz
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;			 //å£çº¿ç¿»è½¬é€Ÿåº¦ä¸º50MHz
   GPIO_Init(GPIOB, &GPIO_InitStructure);	
 }
 

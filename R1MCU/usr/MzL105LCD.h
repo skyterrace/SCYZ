@@ -1,6 +1,6 @@
 #ifndef __MzL05_LCD_H
 #define __MzL05_LCD_H
-//MzL05-12864 ²»´ø×Ö¿âLCDÏÔÊ¾¿ØÖÆ
+//MzL05-12864 ä¸å¸¦å­—åº“LCDæ˜¾ç¤ºæ§åˆ¶
 #include "stm32f10x.h"
 
 
@@ -21,13 +21,13 @@ void MzL05LCD_PutChar(unsigned char x,unsigned char y,char a);
 void MzL05LCD_PutString(unsigned char x,unsigned char y,char *p);
 
 
-//³£Á¿¶¨Òå£¬Ô­LCD_Config.hÎÄ¼ş
-#define LCD_X_MAX			128-1			//ÆÁÄ»µÄXÖáµÄÎïÀí¿í¶È
-#define LCD_Y_MAX			64-1			//ÆÁÄ»µÄYÖáµÄÎïÀí¿í¶È
+//å¸¸é‡å®šä¹‰ï¼ŒåŸLCD_Config.hæ–‡ä»¶
+#define LCD_X_MAX			128-1			//å±å¹•çš„Xè½´çš„ç‰©ç†å®½åº¦
+#define LCD_Y_MAX			64-1			//å±å¹•çš„Yè½´çš„ç‰©ç†å®½åº¦
 			
-#define LCD_XY_Switch		0				//ÏÔÊ¾Ê±XÖáºÍYÓÉ½»»»
-#define LCD_X_Rev			0				//ÏÔÊ¾Ê±XÖá·´×ª
-#define LCD_Y_Rev			0				//ÏÔÊ¾Ê±YÖá·´×ª
+#define LCD_XY_Switch		0				//æ˜¾ç¤ºæ—¶Xè½´å’ŒYç”±äº¤æ¢
+#define LCD_X_Rev			0				//æ˜¾ç¤ºæ—¶Xè½´åè½¬
+#define LCD_Y_Rev			0				//æ˜¾ç¤ºæ—¶Yè½´åè½¬
 
 #if LCD_XY_Switch == 0
 	#define Dis_X_MAX		LCD_X_MAX
@@ -39,24 +39,24 @@ void MzL05LCD_PutString(unsigned char x,unsigned char y,char *p);
 	#define Dis_Y_MAX		LCD_X_MAX	
 #endif
 
-#define LCD_INITIAL_COLOR	0x00			//¶¨ÒåLCDÆÁ³õÊ¼»¯Ê±µÄ±³¾°É«
+#define LCD_INITIAL_COLOR	0x00			//å®šä¹‰LCDå±åˆå§‹åŒ–æ—¶çš„èƒŒæ™¯è‰²
 
-//ÒÔÏÂ¶¨ÒåÎªÕë¶ÔÓÚSPLC501µÄ¹¦ÄÜÖ¸Áî½øĞĞ¶¨ÒåµÄ£¬¾Ö²¿¿ÉĞŞ¸Ä~
-//LCD¹©µçµçÆ½Ñ¡Ôñ
-#define		M_LCD_VDD_SET	M_LCD_SETR_4		//3.3V¹©µçÊ±Ñ¡´Ë¶şÏî
+//ä»¥ä¸‹å®šä¹‰ä¸ºé’ˆå¯¹äºSPLC501çš„åŠŸèƒ½æŒ‡ä»¤è¿›è¡Œå®šä¹‰çš„ï¼Œå±€éƒ¨å¯ä¿®æ”¹~
+//LCDä¾›ç”µç”µå¹³é€‰æ‹©
+#define		M_LCD_VDD_SET	M_LCD_SETR_4		//3.3Vä¾›ç”µæ—¶é€‰æ­¤äºŒé¡¹
 #define		M_LCD_VDD		M_LCD_BIAS_9		//....
-//#define		M_LCD_VDD_SET	M_LCD_SETR_4	//5.0V¹©µçÊ±Ñ¡´Ë¶şÏî
+//#define		M_LCD_VDD_SET	M_LCD_SETR_4	//5.0Vä¾›ç”µæ—¶é€‰æ­¤äºŒé¡¹
 //#define		M_LCD_VDD		M_LCD_BIAS_9	//...
-//LCDÖ¸Áî
-//LCD¿ª¹ØÃüÁî
+//LCDæŒ‡ä»¤
+//LCDå¼€å…³å‘½ä»¤
 #define		M_LCD_ON		0xaf
 #define		M_LCD_OFF		0xae
-//ÉèÖÃÉÏµç¿ØÖÆÄ£Ê½
+//è®¾ç½®ä¸Šç”µæ§åˆ¶æ¨¡å¼
 #define		M_LCD_POWER_BC	0x2c
 #define		M_LCD_POWER_VR	0x2a
 #define		M_LCD_POWER_VC	0x29
 #define		M_LCD_POWER_ALL	0x2f
-//V5ÄÚ²¿µçÑ¹µ÷½Úµç×èÉèÖÃ¡­¡­
+//V5å†…éƒ¨ç”µå‹è°ƒèŠ‚ç”µé˜»è®¾ç½®â€¦â€¦
 #define		M_LCD_SETR_0	0x20
 #define		M_LCD_SETR_1	0x21
 #define		M_LCD_SETR_2	0x22
@@ -66,67 +66,67 @@ void MzL05LCD_PutString(unsigned char x,unsigned char y,char *p);
 #define		M_LCD_SETR_6	0x26
 #define		M_LCD_SETR_7	0x27
 //...end
-#define		M_LCD_ELE_VOL	0x81		//µçÁ¿ÉèÖÃÄ£Ê½£¨ÏÔÊ¾ÁÁ¶È£©
-//Æ«Ñ¹ÉèÖÃ
-#define		M_LCD_BIAS_9	0xa2		//V5Ê±Ñ¡´ËÑ¡ÏîÉèÖÃ
-#define		M_LCD_BIAS_7	0xa1		//V3Ê±Ñ¡´ËÑ¡ÏîÉèÖÃ
-//Com É¨Ãè·½Ê½ÉèÖÃÃüÁî
-#define		M_LCD_COM_NOR	0xc0		//Õı³£·½Ê½
-#define		M_LCD_COM_REV	0xc8		//·´Ïà
-//Segment·½ÏòÑ¡Ôñ
-#define		M_LCD_SEG_NOR	0xa0		//Õı³£
-#define		M_LCD_SEG_REV	0xa1		//·´Ïò
-//È«ÆÁµãÁÁ/±ä°µÖ¸Áî
+#define		M_LCD_ELE_VOL	0x81		//ç”µé‡è®¾ç½®æ¨¡å¼ï¼ˆæ˜¾ç¤ºäº®åº¦ï¼‰
+//åå‹è®¾ç½®
+#define		M_LCD_BIAS_9	0xa2		//V5æ—¶é€‰æ­¤é€‰é¡¹è®¾ç½®
+#define		M_LCD_BIAS_7	0xa1		//V3æ—¶é€‰æ­¤é€‰é¡¹è®¾ç½®
+//Com æ‰«ææ–¹å¼è®¾ç½®å‘½ä»¤
+#define		M_LCD_COM_NOR	0xc0		//æ­£å¸¸æ–¹å¼
+#define		M_LCD_COM_REV	0xc8		//åç›¸
+//Segmentæ–¹å‘é€‰æ‹©
+#define		M_LCD_SEG_NOR	0xa0		//æ­£å¸¸
+#define		M_LCD_SEG_REV	0xa1		//åå‘
+//å…¨å±ç‚¹äº®/å˜æš—æŒ‡ä»¤
 #define		M_LCD_ALL_LIGNT	0xa5		//LCD ALL paint ON
 #define		M_LCD_ALL_LOW	0xa4		//Normal Display mode
-//ÕıÏà·´ÏàÏÔÊ¾¿ØÖÆÖ¸Áî£¬RAMÖĞÊı¾İ²»±ä
-#define		M_LCD_ALL_NOR	0xa6		//ÕıÏà
-#define		M_LCD_ALL_REV	0xa7		//·´Ïà
-//¾²Ì¬Ö¸Ê¾Æ÷¿ØÖÆÖ¸Áî
+//æ­£ç›¸åç›¸æ˜¾ç¤ºæ§åˆ¶æŒ‡ä»¤ï¼ŒRAMä¸­æ•°æ®ä¸å˜
+#define		M_LCD_ALL_NOR	0xa6		//æ­£ç›¸
+#define		M_LCD_ALL_REV	0xa7		//åç›¸
+//é™æ€æŒ‡ç¤ºå™¨æ§åˆ¶æŒ‡ä»¤
 #define		M_LCD_STATIC_ON	0xad		//ON
 #define		M_LCD_STATIC_OFF 0xac		//OFF
-//ÉèÖÃÏÔÊ¾ÆğÊ¼ĞĞ¶ÔÓ¦RAMĞĞºÅ
-#define		M_LCD_BEGIN_LINE 0x40		//»ùÊı£¬ºóÃæ¿É¼ÓµÄÎ²Êı¿ÉÎª0~63
-//ÉèÖÃµ±Ç°Ò³»ùÊı
-#define		M_LCD_COL_PAGE	0xb0		//»ùÊıÖ¸Áî£¬ºó¿É¼ÓÎ²Êı0~8
-//ÉèÖÃµ±Ç°ÁĞ»ùÊı
-#define		M_LCD_COL_LINE_LOW	0x04		//»ùÊıÖ¸Áî£¬µÍËÄÎ»ÓĞĞ§
-#define		M_LCD_COL_LINE_HIG	0x10		//»ùÊıÖ¸Áî£¬µÍËÄÎ»ÓĞĞ§
+//è®¾ç½®æ˜¾ç¤ºèµ·å§‹è¡Œå¯¹åº”RAMè¡Œå·
+#define		M_LCD_BEGIN_LINE 0x40		//åŸºæ•°ï¼Œåé¢å¯åŠ çš„å°¾æ•°å¯ä¸º0~63
+//è®¾ç½®å½“å‰é¡µåŸºæ•°
+#define		M_LCD_COL_PAGE	0xb0		//åŸºæ•°æŒ‡ä»¤ï¼Œåå¯åŠ å°¾æ•°0~8
+//è®¾ç½®å½“å‰åˆ—åŸºæ•°
+#define		M_LCD_COL_LINE_LOW	0x04		//åŸºæ•°æŒ‡ä»¤ï¼Œä½å››ä½æœ‰æ•ˆ
+#define		M_LCD_COL_LINE_HIG	0x10		//åŸºæ•°æŒ‡ä»¤ï¼Œä½å››ä½æœ‰æ•ˆ
 
 
-//º¯Êı¶¨Òå£¬Ô­LCD_Dis.hÎÄ¼ş
-//LCD ³õÊ¼»¯º¯Êı£¬Ò»°ãÓÃÓÚLCDÆÁµÄ¼Ä´æÆ÷³õÊ¼»¯
-extern void LCD_Init(void);	//ÔÚLCD_Driver_User.cÖĞ¶¨ÒåµÄº¯Êı£¬ÈçÓĞ±ØÒª¸Ãº¯Êı»¹»á°üº¬¶Ë¿Ú³õÊ¼»¯¡¢¸´Î»µÈ²Ù×÷
+//å‡½æ•°å®šä¹‰ï¼ŒåŸLCD_Dis.hæ–‡ä»¶
+//LCD åˆå§‹åŒ–å‡½æ•°ï¼Œä¸€èˆ¬ç”¨äºLCDå±çš„å¯„å­˜å™¨åˆå§‹åŒ–
+extern void LCD_Init(void);	//åœ¨LCD_Driver_User.cä¸­å®šä¹‰çš„å‡½æ•°ï¼Œå¦‚æœ‰å¿…è¦è¯¥å‡½æ•°è¿˜ä¼šåŒ…å«ç«¯å£åˆå§‹åŒ–ã€å¤ä½ç­‰æ“ä½œ
 
-//»­Ö±Ïßº¯Êı£¬s_x¡¢s_yÎªÆğÊ¼µã£¬e_x¡¢e_yÎª½áÊøµã
+//ç”»ç›´çº¿å‡½æ•°ï¼Œs_xã€s_yä¸ºèµ·å§‹ç‚¹ï¼Œe_xã€e_yä¸ºç»“æŸç‚¹
 //extern void Line(unsigned char s_x,unsigned char s_y,unsigned char e_x,unsigned char e_y);
-//»æÍ¼Ä£Ê½¡¢µ±Ç°»æÍ¼ÑÕÉ«ÉèÖÃ
+//ç»˜å›¾æ¨¡å¼ã€å½“å‰ç»˜å›¾é¢œè‰²è®¾ç½®
 extern void SetPaintMode(unsigned char Mode,unsigned char Color);
-//±ê×¼×Ö·ûÉèÖÃ£¬°üÀ¨Á½ĞÍºÅASCIIÂëµÄ´óĞ¡³ß´ç£¬ÒÔ¼°×ÖÌåÑÕÉ«µÄÉèÖÃ
+//æ ‡å‡†å­—ç¬¦è®¾ç½®ï¼ŒåŒ…æ‹¬ä¸¤å‹å·ASCIIç çš„å¤§å°å°ºå¯¸ï¼Œä»¥åŠå­—ä½“é¢œè‰²çš„è®¾ç½®
 extern void FontSet(unsigned char Font_NUM,unsigned char Color);
-//ÓÚx¡¢yµÄ×ø±êÉÏĞ´ÈëÒ»¸ö±ê×¼×Ö·û
+//äºxã€yçš„åæ ‡ä¸Šå†™å…¥ä¸€ä¸ªæ ‡å‡†å­—ç¬¦
 extern void PutChar(unsigned char x,unsigned char y,char a);
-//ÓÚx¡¢yµÄ×ø±êÎªÆğÊ¼Ğ´ÈëÒ»´®±ê×¼×Ö·û´®
+//äºxã€yçš„åæ ‡ä¸ºèµ·å§‹å†™å…¥ä¸€ä¸²æ ‡å‡†å­—ç¬¦ä¸²
 extern void PutString(unsigned char x,unsigned char y,char *p);
-//ÓÚx¡¢yµÄ×ø±êÎªÖĞĞÄ£¬»æÖÆÒ»¸öÔ²±ß»òÊµĞÄÔ²
+//äºxã€yçš„åæ ‡ä¸ºä¸­å¿ƒï¼Œç»˜åˆ¶ä¸€ä¸ªåœ†è¾¹æˆ–å®å¿ƒåœ†
 //extern void PutPixel(unsigned char x,unsigned char y);
 //extern void Circle(unsigned char x,unsigned char y,unsigned char r,unsigned char mode);
-//»æÖÆÒ»¸öÒÔleft¡¢topºÍright¡¢bottomÎªÁ½¸ö¶Ô½ÇµÄ¾ØĞÎ¿ò»òÕßÊµĞÄ¾ØĞÎ
+//ç»˜åˆ¶ä¸€ä¸ªä»¥leftã€topå’Œrightã€bottomä¸ºä¸¤ä¸ªå¯¹è§’çš„çŸ©å½¢æ¡†æˆ–è€…å®å¿ƒçŸ©å½¢
 extern void Rectangle(unsigned char left,unsigned char top,unsigned char right,unsigned char bottom);
-//ÇåÆÁº¯Êı£¬Ö´ĞĞÈ«ÆÁÄ»Çå³ı»òÌî³äÇ°¾°É«
+//æ¸…å±å‡½æ•°ï¼Œæ‰§è¡Œå…¨å±å¹•æ¸…é™¤æˆ–å¡«å……å‰æ™¯è‰²
 void ClrScreen(unsigned char Mode);
 
-//ÒÔÏÂº¯ÊıÒÔ¼°±äÁ¿µÄÉùÃ÷Ò»°ã½¨ÒéÓÃ»§²»Òªµ÷ÓÃ£¬½ö¹©¸ß¼¶ÓÃ»§ÔÚ×ÔĞĞ±àĞ´ÌØÊâÏÔÊ¾Ğ§¹ûÒÔ¼°ÌØĞÔÓ¦ÓÃ³ÌĞòÊ±Ê¹ÓÃ
+//ä»¥ä¸‹å‡½æ•°ä»¥åŠå˜é‡çš„å£°æ˜ä¸€èˆ¬å»ºè®®ç”¨æˆ·ä¸è¦è°ƒç”¨ï¼Œä»…ä¾›é«˜çº§ç”¨æˆ·åœ¨è‡ªè¡Œç¼–å†™ç‰¹æ®Šæ˜¾ç¤ºæ•ˆæœä»¥åŠç‰¹æ€§åº”ç”¨ç¨‹åºæ—¶ä½¿ç”¨
 //
-//extern unsigned char code Asii16[];		//8X16µÄASII×Ö·û¿â
-//extern unsigned char code GB32[];		//×Ô¶¨ÒåµÄ32X29ºº×Ö¿â
-//extern unsigned char code GB48[];		//×Ô¶¨ÒåµÄ48X55ºº×Ö¿â
+//extern unsigned char code Asii16[];		//8X16çš„ASIIå­—ç¬¦åº“
+//extern unsigned char code GB32[];		//è‡ªå®šä¹‰çš„32X29æ±‰å­—åº“
+//extern unsigned char code GB48[];		//è‡ªå®šä¹‰çš„48X55æ±‰å­—åº“
 
-extern unsigned char X_Witch;					//×Ö·ûĞ´ÈëÊ±µÄ¿í¶È
-extern unsigned char Y_Witch;					//×Ö·ûĞ´ÈëÊ±µÄ¸ß¶È
-extern unsigned char Font_Wrod;				//×ÖÌåµÄ´ó
-extern unsigned char *Char_TAB;		//×Ö¿âÖ¸Õë
-//extern unsigned char Plot_Mode;				//»æÍ¼Ä£Ê½
+extern unsigned char X_Witch;					//å­—ç¬¦å†™å…¥æ—¶çš„å®½åº¦
+extern unsigned char Y_Witch;					//å­—ç¬¦å†™å…¥æ—¶çš„é«˜åº¦
+extern unsigned char Font_Wrod;				//å­—ä½“çš„å¤§
+extern unsigned char *Char_TAB;		//å­—åº“æŒ‡é’ˆ
+//extern unsigned char Plot_Mode;				//ç»˜å›¾æ¨¡å¼
 extern unsigned char BMP_Color;
 extern unsigned char Char_Color;
 

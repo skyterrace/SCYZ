@@ -98,11 +98,11 @@ bool R1_has_fail(void)
 // 	{
 // 		sR1Mower.FailInfo = "BS RF      ";  
 // 	}
-// 	else if(sR1Mower.TiltAngle>27) //R1ÊÇ·ñÇã¸²£¬ºá¹ö»òÕß¸©Ñö½Ç¶È´óÓÚ27¶È£¬ÔòÈÏÎªÇã¸²
+// 	else if(sR1Mower.TiltAngle>27) //R1æ˜¯å¦å€¾è¦†ï¼Œæ¨ªæ»šæˆ–è€…ä¿¯ä»°è§’åº¦å¤§äºŽ27åº¦ï¼Œåˆ™è®¤ä¸ºå€¾è¦†
 // 	{
 // 		sR1Mower.FailInfo = "Over Turn  ";
 // 	}
-// 	else if(R1_is_out_area()) //R1ÅÜµ½±ß½çÖ®Íâ
+// 	else if(R1_is_out_area()) //R1è·‘åˆ°è¾¹ç•Œä¹‹å¤–
 // 	{
 // 		sR1Mower.FailInfo = "Out Area   ";
 // 	}
@@ -116,7 +116,7 @@ bool R1_has_fail(void)
  return FALSE;
 }
 
-bool R1_is_working_time(void)  //ÓÃµ½clock_calendar.cÖÐµÄº¯ÊýºÍ±äÁ¿¶¨Òå
+bool R1_is_working_time(void)  //ç”¨åˆ°clock_calendar.cä¸­çš„å‡½æ•°å’Œå˜é‡å®šä¹‰
 {
 	uint16_t nTime,nStart,nEnd,nWeekDay;
 	nWeekDay = WeekDay(s_DateStructVar.Year,s_DateStructVar.Month,s_DateStructVar.Day);
@@ -150,7 +150,7 @@ bool R1_is_crashing()
 	return ((sR1Mower.SS_STATUS_L  & 0x0F) ? TRUE:FALSE);
 }	
 
-//ÅÐ¶ÏÊÇ·ñÎ»ÓÚ¹¤×÷ÇøÓòÖ®Íâ£¬Èç¹ûÁ¬Ðø¼ì²âµ½20´ÎÒìÏà£¬ÔòÈÏÎªÔÚ±ß½çÖ®Íâ¡£
+//åˆ¤æ–­æ˜¯å¦ä½äºŽå·¥ä½œåŒºåŸŸä¹‹å¤–ï¼Œå¦‚æžœè¿žç»­æ£€æµ‹åˆ°20æ¬¡å¼‚ç›¸ï¼Œåˆ™è®¤ä¸ºåœ¨è¾¹ç•Œä¹‹å¤–ã€‚
 bool R1_is_out_area(void)
 {
 	//if(sR1Mower.WorkMode == 3) return FALSE;
@@ -168,7 +168,7 @@ bool R1_is_out_area(void)
 	else return FALSE;
 }
 
-//¸ù¾Ý¶à¸öµçÀÂÐÅºÅµÄÇ¿¶ÈÈ·¶¨±ß½çÐÅºÅÇ¿¶È
+//æ ¹æ®å¤šä¸ªç”µç¼†ä¿¡å·çš„å¼ºåº¦ç¡®å®šè¾¹ç•Œä¿¡å·å¼ºåº¦
 void UpdateBorderStrength()
 {
 	if(sR1Mower.BSStrength[0]>sR1Mower.BSStrength[1])
@@ -186,14 +186,14 @@ void UpdateBorderStrength()
 	
 }
 
-//ÅÐ¶ÏÊÇ·ñÔÚÖÐÏß¸½½ü£¬Èç¹ûµçÀÂ0ºÍµçÀÂ1µÄÐÅºÅÇ¿¶È¶¼´óÓÚÐÅºÅÇ¿¶È×îÐ¡Éè¶¨Öµ£¬Ôò·µ»ØÕæ£¬·ñÕß·µ»Ø¼Ù
-//*4ÊÇÒòÎªÐÅºÅÇ¿¶ÈÈ¡¸ß°ËÎ»£¬ÉáÆúµÍ¶þÎ»
+//åˆ¤æ–­æ˜¯å¦åœ¨ä¸­çº¿é™„è¿‘ï¼Œå¦‚æžœç”µç¼†0å’Œç”µç¼†1çš„ä¿¡å·å¼ºåº¦éƒ½å¤§äºŽä¿¡å·å¼ºåº¦æœ€å°è®¾å®šå€¼ï¼Œåˆ™è¿”å›žçœŸï¼Œå¦è€…è¿”å›žå‡
+//*4æ˜¯å› ä¸ºä¿¡å·å¼ºåº¦å–é«˜å…«ä½ï¼Œèˆå¼ƒä½ŽäºŒä½
 bool R1_is_near_middle_line(void)
 {
 	return (sR1Mower.BSStrength[0]> 4*sR1Mower.sRunParam.BsStrenghL && sR1Mower.BSStrength[1]> 4*sR1Mower.sRunParam.BsStrenghL) ? TRUE : FALSE;
 }
 
-//¿ÉÅÐ¶ÏÊÇÔÚÄÄ¸öµçÀÂÇøÓò£¬Ò»°ãÀ´½²Î»ÓÚÐÅºÅÇ¿¶È´óµÄÄÇ¸öÇøÓò¡£
+//å¯åˆ¤æ–­æ˜¯åœ¨å“ªä¸ªç”µç¼†åŒºåŸŸï¼Œä¸€èˆ¬æ¥è®²ä½äºŽä¿¡å·å¼ºåº¦å¤§çš„é‚£ä¸ªåŒºåŸŸã€‚
 uint8_t R1_is_in_which_area(void)
 {
 	if(sR1Mower.BSStrength[0] > sR1Mower.BSStrength[1]) return 0;

@@ -2,26 +2,26 @@
 #define __R1MT_H
 #include "stm32f10x.h"
 
-//485¶ÁĞ´¶Ë¿Ú¶¨Òå
+//485è¯»å†™ç«¯å£å®šä¹‰
 #define USART485_READ GPIO_ResetBits(GPIOA,GPIO_Pin_8);
 #define USART485_WRITE GPIO_SetBits(GPIOA,GPIO_Pin_8);
 
 
-//·ûºÅ¶¨Òå
-#define CMD_BYTE_LENGTH 6   //Ö¸Áî³¤¶È
-#define CMD_BYTE_TAR 0 //Ä¿±êµØÖ·Î»
-#define CMD_BYTE_SRC 1 //Ô´µØÖ·Î»
-#define CMD_BYTE_TYPE 2 //ÃüÁîÀàĞÍÎ»
-#define CMD_BYTE_PARAM_H 3 //²ÎÊı¸ß8Î»
-#define CMD_BYTE_PARAM_L 4 //²ÎÊıµÍ8Î»
-#define CMD_BYTE_CHK 5 		//Ğ£ÑéÎ»
+//ç¬¦å·å®šä¹‰
+#define CMD_BYTE_LENGTH 6   //æŒ‡ä»¤é•¿åº¦
+#define CMD_BYTE_TAR 0 //ç›®æ ‡åœ°å€ä½
+#define CMD_BYTE_SRC 1 //æºåœ°å€ä½
+#define CMD_BYTE_TYPE 2 //å‘½ä»¤ç±»å‹ä½
+#define CMD_BYTE_PARAM_H 3 //å‚æ•°é«˜8ä½
+#define CMD_BYTE_PARAM_L 4 //å‚æ•°ä½8ä½
+#define CMD_BYTE_CHK 5 		//æ ¡éªŒä½
 
-#define MT_ADDR 0x82   //ÔË¿ØÏµÍ³µØÖ·
-#define CC_ADDR 0x81    //×Ü¿ØÏµÍ³µØÖ·
-#define BS_ADDR 0x84	//±ß½çÏµÍ³µØÖ·
-#define SS_ADDR 0x85	//±ß½çÏµÍ³µØÖ·
+#define MT_ADDR 0x82   //è¿æ§ç³»ç»Ÿåœ°å€
+#define CC_ADDR 0x81    //æ€»æ§ç³»ç»Ÿåœ°å€
+#define BS_ADDR 0x84	//è¾¹ç•Œç³»ç»Ÿåœ°å€
+#define SS_ADDR 0x85	//è¾¹ç•Œç³»ç»Ÿåœ°å€
 
-//MTËÙ¶È¿ØÖÆÃüÁî
+//MTé€Ÿåº¦æ§åˆ¶å‘½ä»¤
 #define MT_CMD_DRV_LEFT_FWD_SPEED 0x21
 #define MT_CMD_DRV_LEFT_REV_SPEED 0x29
 #define MT_CMD_DRV_RIGHT_FWD_SPEED 0x22
@@ -31,7 +31,7 @@
 #define MT_CMD_MOW_SPEED 0x31
 #define MT_CMD_DRV_ENABLE 0x32
 
-//MT×´Ì¬ÉèÖÃÃüÁî
+//MTçŠ¶æ€è®¾ç½®å‘½ä»¤
 #define MT_CMD_SET_GEAR_RATIO	0x01
 #define MT_CMD_SET_WHEELE_RADIUS	0x02
 #define MT_CMD_SET_AXIAL_LENGTH	0x03
@@ -39,7 +39,7 @@
 #define MT_CMD_SET_MAX_SPEED	0x05
 #define MT_CMD_SET_SPEED_STEP	0x06
 
-//MT×´Ì¬²éÑ¯ÃüÁî
+//MTçŠ¶æ€æŸ¥è¯¢å‘½ä»¤
 #define MT_CMD_QUERY_STATUS	0x10
 #define MT_CMD_QUERY_GEAR_RATIO	0x11
 #define MT_CMD_QUERY_WHEELE_RADIUS	0x12
@@ -52,11 +52,11 @@
 int8_t SendCmd(uint8_t * cmd);
 int8_t QueryCmd(uint8_t * cmd);
 
-int8_t SetDriverSpeed(int8_t nLeft,int8_t nRight); //ËÙ¶È·¶Î§(-63~+64)
-int8_t SetMowSpeed(uint8_t nSpeed); //ÉèÖÃ¸î²İµç»úËÙ¶È£¬ËÙ¶È·¶Î§(0~127)
-int8_t EnableDriver(int8_t nOn); //nOn = 1 Æô¶¯£¬ =0 Í£Ö¹
-int8_t QueryMTStatus(uint8_t cType); //²éÑ¯MT×´Ì¬
+int8_t SetDriverSpeed(int8_t nLeft,int8_t nRight); //é€Ÿåº¦èŒƒå›´(-63~+64)
+int8_t SetMowSpeed(uint8_t nSpeed); //è®¾ç½®å‰²è‰ç”µæœºé€Ÿåº¦ï¼Œé€Ÿåº¦èŒƒå›´(0~127)
+int8_t EnableDriver(int8_t nOn); //nOn = 1 å¯åŠ¨ï¼Œ =0 åœæ­¢
+int8_t QueryMTStatus(uint8_t cType); //æŸ¥è¯¢MTçŠ¶æ€
 
-extern uint8_t cSer_Flag;//´®¿Ú½ÓÊÕµ½Ó¦´ğĞÅºÅ
-extern uint8_t cmdRec[CMD_BYTE_LENGTH]; //½ÓÊÕÃüÁî»º³åÇø
+extern uint8_t cSer_Flag;//ä¸²å£æ¥æ”¶åˆ°åº”ç­”ä¿¡å·
+extern uint8_t cmdRec[CMD_BYTE_LENGTH]; //æ¥æ”¶å‘½ä»¤ç¼“å†²åŒº
 #endif

@@ -115,14 +115,14 @@ void CheckForDaysElapsed(void);
 // void AutoClockCalibration(void);
 // void ReturnFromStopMode(void);
 
-//¶¨Ê±ÑÓÊ±³ÌĞò
-static __IO uint32_t TimingDelay; //SysTick¼ÆÊı±äÁ¿
-static __IO uint32_t TimeStamp_ms; //ºÁÃë¾ø¶ÔÖµ
-void TimingDelay_Decrement(void);//»ñÈ¡½ÚÅÄ³ÌĞò
-void Delay_us(__IO uint32_t nTime);//¶¨Ê±ÑÓÊ±³ÌĞò 10usÎªµ¥Î»
-void Delay_ms(__IO uint32_t nTime);//¶¨Ê±ÑÓÊ±³ÌĞò 1msÎªµ¥Î»
+//å®šæ—¶å»¶æ—¶ç¨‹åº
+static __IO uint32_t TimingDelay; //SysTickè®¡æ•°å˜é‡
+static __IO uint32_t TimeStamp_ms; //æ¯«ç§’ç»å¯¹å€¼
+void TimingDelay_Decrement(void);//è·å–èŠ‚æ‹ç¨‹åº
+void Delay_us(__IO uint32_t nTime);//å®šæ—¶å»¶æ—¶ç¨‹åº 10usä¸ºå•ä½
+void Delay_ms(__IO uint32_t nTime);//å®šæ—¶å»¶æ—¶ç¨‹åº 1msä¸ºå•ä½
 uint32_t GetTimeStamp_ms(void);
-//¶¨Ê±ÑÓÊ±³ÌĞò½áÊø
+//å®šæ—¶å»¶æ—¶ç¨‹åºç»“æŸ
 
 #endif /* __CLOCK_CALENDAR_H */
 

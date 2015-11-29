@@ -9,7 +9,7 @@ uint8_t IIC_Buffer_Rx[25];
 /* Buffer of data to be transmitted by I2C1 */
 uint8_t IIC_Buffer_Tx[25] = {0x5, 0x6,0x8,0xA};
 
-//±äÁ¿¶¨Òå
+//å˜é‡å®šä¹‰
 long temperature;
 struct int_param_s int_param;
 int result;
@@ -28,15 +28,15 @@ struct dmpEuler_s sEuler;
 struct dmpGravity_s sGravity;
 struct dmpQuaternion_s sQuaternion;
 struct dmpYawPitchRoll_s sYawPitchRoll;
-//±äÁ¿¶¨Òå½áÊø
+//å˜é‡å®šä¹‰ç»“æŸ
 
 //**************************************
-//³õÊ¼»¯MPU6050
+//åˆå§‹åŒ–MPU6050
 //**************************************
 int InitMPU6050()
 {
 	Status rtn;
-	//Single_WriteI2C(PWR_MGMT_1, 0x00);	//½â³ıĞİÃß×´Ì¬
+	//Single_WriteI2C(PWR_MGMT_1, 0x00);	//è§£é™¤ä¼‘çœ çŠ¶æ€
 	IIC_Buffer_Tx[0]=PWR_MGMT_1;
 	IIC_Buffer_Tx[1]=0x01;
   rtn=I2C_Master_BufferWrite(MPU6050_I2C, IIC_Buffer_Tx,2,Polling, MPU6050_Addr);
@@ -63,7 +63,7 @@ int InitMPU6050()
   rtn=I2C_Master_BufferWrite(MPU6050_I2C, IIC_Buffer_Tx,2,Polling, MPU6050_Addr);
 	
 	
-		//ÅäÖÃAux I2C Îª bypass mode , 0x37µÄbit1=1 ¶øÇÒ 0x6AµÄbit
+		//é…ç½®Aux I2C ä¸º bypass mode , 0x37çš„bit1=1 è€Œä¸” 0x6Açš„bit
 	IIC_Buffer_Tx[0] = 0x37;
 	IIC_Buffer_Tx[1] = 0x02;  //0x37 / INT_LEVEL INT_OPEN LATCH _INT_EN INT_RD _CLEAR FSYNC_ INT_LEVEL FSYNC_ INT_EN I2C _BYPASS _EN CLKOUT _EN
 	result = I2C_Master_BufferWrite(MPU6050_I2C, IIC_Buffer_Tx,2,Polling, MPU6050_Addr);
@@ -76,7 +76,7 @@ int InitMPU6050()
 }
 
 //**************************************
-//¶ÁÖ¸¶¨µØÖ·Êı¾İ
+//è¯»æŒ‡å®šåœ°å€æ•°æ®
 //**************************************
 uint16_t MPU6050_GetData(uint8_t REG_Address)
 {
@@ -94,11 +94,11 @@ uint16_t MPU6050_GetData(uint8_t REG_Address)
 		rtn=I2C_Master_BufferRead(MPU6050_I2C,IIC_Buffer_Rx,1,Polling, MPU6050_Addr);
 		if(rtn == Success) L=IIC_Buffer_Rx[0];
 		else L=0;
-	return (H<<8)+L;   //ºÏ³ÉÊı¾İ
+	return (H<<8)+L;   //åˆæˆæ•°æ®
 }
 
 //**************************************
-//Á¬Ğø¶Áax,ay,az,temperature,gx,gy,gzÊı¾İ
+//è¿ç»­è¯»ax,ay,az,temperature,gx,gy,gzæ•°æ®
 //**************************************
 int MPU6050_ReadRawData(struct MPU6050_RawData_s *s_IMUVar)
 {
@@ -282,11 +282,11 @@ int dmpGetEuler(struct dmpEuler_s *data, struct dmpQuaternion_s *q) {
 }
 
 int dmpGetYawPitchRoll(struct dmpYawPitchRoll_s *data, struct dmpQuaternion_s *q, struct dmpGravity_s *gravity) {
-    // yaw: (about Z axis) Æ«º½½Ç
+    // yaw: (about Z axis) åèˆªè§’
     data->yaw = atan2(2*q -> x*q -> y - 2*q -> w*q -> z, 2*q -> w*q -> w + 2*q -> x*q -> x - 1);
-    // pitch: (nose up/down, about Y axis) ¸©Ñö½Ç
+    // pitch: (nose up/down, about Y axis) ä¿¯ä»°è§’
     data->pitch = atan(gravity -> x / sqrt(gravity -> y*gravity -> y + gravity -> z*gravity -> z));
-    // roll: (tilt left/right, about X axis) ºá¹ö½Ç
+    // roll: (tilt left/right, about X axis) æ¨ªæ»šè§’
     data->roll = atan(gravity -> y / sqrt(gravity -> x*gravity -> x + gravity -> z*gravity -> z));
     return 0;
 }
@@ -311,10 +311,10 @@ int MPU6050GetYawPitchRoll(struct dmpYawPitchRoll_s *var)
 		sQuaternion.y=quat[2]/1073741824.0f;
 		sQuaternion.z=quat[3]/1073741824.0f;
 
-		//¼ÆËãÅ·À­½Ç
+		//è®¡ç®—æ¬§æ‹‰è§’
 		//dmpGetEuler(&sEuler,&sQuaternion);
 		
-		//¼ÆËã¸©Ñö½Ç
+		//è®¡ç®—ä¿¯ä»°è§’
 		
 		dmpGetGravity(&sGravity,&sQuaternion);
 		dmpGetYawPitchRoll(&sYawPitchRoll,&sQuaternion,&sGravity);
@@ -347,7 +347,7 @@ int InitMPU6050DMP()
 
     /* Get/set hardware configuration. Start gyro. */
     /* Wake up all sensors. */
-//     result = mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS);  //×¢Òâ£¡£¡£¡ÆôÓÃÍâ²¿ÂŞÅÌ£¬ÕâÀïÒª°üº¬ INV_XYZ_COMPASS
+//     result = mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS);  //æ³¨æ„ï¼ï¼ï¼å¯ç”¨å¤–éƒ¨ç½—ç›˜ï¼Œè¿™é‡Œè¦åŒ…å« INV_XYZ_COMPASS
 		result = mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL);
     /* Push both gyro and accel data into the FIFO. */
     result = mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL);
@@ -403,7 +403,7 @@ int InitMPU6050DMP()
         DMP_FEATURE_GYRO_CAL);
     result = dmp_set_fifo_rate(100);
     result = mpu_set_dmp_state(1);
-		//ÆôÓÃÔË¶¯¼ì²â£¬µÚÒ»¸ö²ÎÊı¼ì²âÏŞÖµ£¬32mgÔöÁ¿£¬µÚ¶ş¸ö²ÎÊıÊ±¼äµ¥Î»ºÁÃë£¬µÚÈı¸ö²ÎÊıÂË²¨ÆµÂÊ
+		//å¯ç”¨è¿åŠ¨æ£€æµ‹ï¼Œç¬¬ä¸€ä¸ªå‚æ•°æ£€æµ‹é™å€¼ï¼Œ32mgå¢é‡ï¼Œç¬¬äºŒä¸ªå‚æ•°æ—¶é—´å•ä½æ¯«ç§’ï¼Œç¬¬ä¸‰ä¸ªå‚æ•°æ»¤æ³¢é¢‘ç‡
 		result = mpu_lp_motion_interrupt(640,1,2);
 		mpu6050_run_self_test();
 
@@ -411,7 +411,7 @@ int InitMPU6050DMP()
 
 		return result;
 }
-//¶ÁÈ¡MPU6050 I2C Slave0 µÄÊı¾İ
+//è¯»å–MPU6050 I2C Slave0 çš„æ•°æ®
 int MPU6050_Read_Ext_Sens_Data(uint8_t RegAddr,uint8_t *buff, uint8_t length)
 {
 	Status rtn;

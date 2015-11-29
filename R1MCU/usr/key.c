@@ -8,20 +8,20 @@ void Key_Config()
 	GPIO_InitTypeDef GPIO_InitStructure;
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOC|RCC_APB2Periph_GPIOD, ENABLE);	
 	
-  /* K3 ÅäÖÃ°´¼üÖĞ¶ÏÏßPC3 */
+  /* K3 é…ç½®æŒ‰é”®ä¸­æ–­çº¿PC3 */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;					    //ÊäÈëÉÏÀ­
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;					    //è¾“å…¥ä¸Šæ‹‰
   GPIO_Init(GPIOC, &GPIO_InitStructure);
 	
 	
-	  /* K3 ÅäÖÃ°´¼üÖĞ¶ÏÏßPC3 */
+	  /* K3 é…ç½®æŒ‰é”®ä¸­æ–­çº¿PC3 */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_8|GPIO_Pin_9;// |GPIO_Pin_9|GPIO_Pin_14;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;					    //ÊäÈëÉÏÀ­
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;					    //è¾“å…¥ä¸Šæ‹‰
   GPIO_Init(GPIOB, &GPIO_InitStructure);
 	
-		  /* K3 ÅäÖÃ°´¼üÖĞ¶ÏÏßPC3 */
+		  /* K3 é…ç½®æŒ‰é”®ä¸­æ–­çº¿PC3 */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;// |GPIO_Pin_9|GPIO_Pin_14;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;					    //ÊäÈëÉÏÀ­
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;					    //è¾“å…¥ä¸Šæ‹‰
   GPIO_Init(GPIOD, &GPIO_InitStructure);
 }
 
@@ -29,7 +29,7 @@ bool Key_Press(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
 	if(GPIO_ReadInputDataBit(GPIOx,GPIO_Pin)==0){		  //K3  
 	  Delay_us(20000);										  
-		if(GPIO_ReadInputDataBit(GPIOx,GPIO_Pin)==0){		  //°´¼üÏû¶¶¶¯
+		if(GPIO_ReadInputDataBit(GPIOx,GPIO_Pin)==0){		  //æŒ‰é”®æ¶ˆæŠ–åŠ¨
 			return TRUE;
 		}                                                                                                                                                                                      
 	}
@@ -40,8 +40,8 @@ bool Key_Release(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
 	if(GPIO_ReadInputDataBit(GPIOx,GPIO_Pin)==0){		  //K3  
 	  Delay_us(20000);										  
-		if(GPIO_ReadInputDataBit(GPIOx,GPIO_Pin)==0){		  //°´¼üÏû¶¶¶¯
-			while(GPIO_ReadInputDataBit(GPIOx,GPIO_Pin)==0);//ÊÇ·ñËÉ¿ª°´¼ü	 
+		if(GPIO_ReadInputDataBit(GPIOx,GPIO_Pin)==0){		  //æŒ‰é”®æ¶ˆæŠ–åŠ¨
+			while(GPIO_ReadInputDataBit(GPIOx,GPIO_Pin)==0);//æ˜¯å¦æ¾å¼€æŒ‰é”®	 
 			return TRUE;
 		}                                                                                                                                                                                      
 	}
@@ -60,7 +60,7 @@ bool key_stop()
 			bitclr(bKeyPress,i);
 		}
 	}
-	if(bKeyPress == 0) return TRUE; //¶¥¸Ç´ò¿ª
+	if(bKeyPress == 0) return TRUE; //é¡¶ç›–æ‰“å¼€
 	else return FALSE;
 }
 

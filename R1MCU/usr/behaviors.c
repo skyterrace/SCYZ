@@ -11,30 +11,30 @@ float kp,kd;
 uint16_t BS_Max;
 uint8_t cFollowCheckCount;
 uint8_t cLookEnterArea0;
-int16_t BehaviorTimeElapse=0;  //½øÈëÄ³Ò»×´Ì¬³ÖĞøµÄÊ±¼ä£¬µ¥Î»Ãë£¬ÔÚSwitchToBehaviorÖĞÇåÁã£¬ÓÉÖ÷³ÌĞòµ÷ÓÃR1_BehaviorTimeElapse()¼Ó1£¬
+int16_t BehaviorTimeElapse=0;  //è¿›å…¥æŸä¸€çŠ¶æ€æŒç»­çš„æ—¶é—´ï¼Œå•ä½ç§’ï¼Œåœ¨SwitchToBehaviorä¸­æ¸…é›¶ï¼Œç”±ä¸»ç¨‹åºè°ƒç”¨R1_BehaviorTimeElapse()åŠ 1ï¼Œ
 
 bool R1_CheckEvent(uint16_t CheckStatus)
 {
 	switch (CheckStatus)
 	{
 		case R1_STOP:
-			//¶¥¸Ç´ò¿ª
+			//é¡¶ç›–æ‰“å¼€
 			if(sR1Mower.MCU_STATUS & (R1_AUTOWORK | R1_IDLE | R1_CHARGING | R1_FAIL))
 			{
 				if(key_stop()) return TRUE; 
 			}
-			//½øÈë³äµç×ùÊ±
+			//è¿›å…¥å……ç”µåº§æ—¶
 			if(sR1Mower.MCU_STATUS & R1_FOLLOW)
 			{
 				if(R1_is_charging()) return TRUE;
 			}
 				
-			//ÊÖ¶¯¿ØÖÆ½áÊø
+			//æ‰‹åŠ¨æ§åˆ¶ç»“æŸ
 			if(sR1Mower.MCU_STATUS & R1_MANUAL)
 			{
 				if(sR1Mower.WorkMode != 1) return TRUE;
 			}
-			//²ÎÊıÉèÖÃ½áÊø
+			//å‚æ•°è®¾ç½®ç»“æŸ
 			if(sR1Mower.MCU_STATUS & R1_SETTING)
 			{
 				return TRUE;
@@ -95,15 +95,15 @@ bool R1_CheckEvent(uint16_t CheckStatus)
 			
 			if(sR1Mower.MCU_STATUS & R1_STOP)
 			{
-				if(!key_stop()) {sm_box_all_arrived = 0; return TRUE;} //Í£Ö¹×´Ì¬Ê±¶¥¸Ç±»ºÏÉÏ
+				if(!key_stop()) {sm_box_all_arrived = 0; return TRUE;} //åœæ­¢çŠ¶æ€æ—¶é¡¶ç›–è¢«åˆä¸Š
 			}
 			
-			if(sR1Mower.MCU_STATUS & R1_FAIL) //¹ÊÕÏÇå³ı
+			if(sR1Mower.MCU_STATUS & R1_FAIL) //æ•…éšœæ¸…é™¤
 			{
 				if(!R1_has_fail() && BehaviorTimeElapse > 5) return TRUE;
 			}
 			
-			if(sR1Mower.MCU_STATUS & R1_GOOUT)  //½øÈë¹¤×÷Çø
+			if(sR1Mower.MCU_STATUS & R1_GOOUT)  //è¿›å…¥å·¥ä½œåŒº
 			{
 				if(BehaviorTimeElapse > 5) return TRUE;
 			}
@@ -180,7 +180,7 @@ void R1_SwitchToBehavior(uint16_t R1Status)
 	switch (R1Status)
 	{
 		case R1_STOP:
-			//´ò¿ªÏÔÊ¾ÆÁ
+			//æ‰“å¼€æ˜¾ç¤ºå±
 			SM_Enable(0);
 			break;
 		
@@ -200,7 +200,7 @@ void R1_SwitchToBehavior(uint16_t R1Status)
 			break;
 		
 		case R1_IDLE:
-			//¶Ï¿ª³äµçÆ÷
+			//æ–­å¼€å……ç”µå™¨
 			break;
 		
 		case R1_GOOUT:
@@ -209,7 +209,7 @@ void R1_SwitchToBehavior(uint16_t R1Status)
 		
 		case R1_PREPARE:
 			SM_Enable(1);		
-			//¹Ø±ÕÏÔÊ¾ÆÁ
+			//å…³é—­æ˜¾ç¤ºå±
 			break;
 		
 		case R1_MOW:
@@ -305,9 +305,9 @@ void R1_ExcecuteActions(void)
 		case R1_MOW:
 			if(sm_loc_arrived == 1)
 			{
-				GPIO_SetBits(GPIOA,GPIO_Pin_3);  //ÉèÖÃÍ¶¶ü¼ÌµçÆ÷
+				GPIO_SetBits(GPIOA,GPIO_Pin_3);  //è®¾ç½®æŠ•é¥µç»§ç”µå™¨
 				Delay_ms(500);
-				GPIO_ResetBits(GPIOA,GPIO_Pin_3);  //Çå³ıÍ¶¶ü¼ÌµçÆ÷
+				GPIO_ResetBits(GPIOA,GPIO_Pin_3);  //æ¸…é™¤æŠ•é¥µç»§ç”µå™¨
 				//SM_Goto_Box(2,1);
 				Delay_ms(1000);
 				SM_Goto_Next();
@@ -336,7 +336,7 @@ void R1_ExcecuteActions(void)
 
 void R1_ManualControl(void)
 {
-	//Ç°½øºóÍË
+	//å‰è¿›åé€€
 	if(!READ_KEY_UP)
 	{
 		if(sR1Mower.TurnDir == 1)
@@ -357,7 +357,7 @@ void R1_ManualControl(void)
 			sm_loc_y_need = sR1Mower.sRunParam.BladeSpeed*100/10;
 		sm_y_dir = 0;
 	}
-	//×óÓÒ×ª
+	//å·¦å³è½¬
 	else if(!READ_KEY_LEFT)
 	{
 		sm_loc_x_need = sR1Mower.sRunParam.BladeSpeed*100/10;

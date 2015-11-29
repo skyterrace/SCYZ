@@ -3,32 +3,32 @@
 #include "stm32f10x.h"
 #include "HMC5883.h"
 
-#define USE_MPU6050   //ÉèÖÃÊÇ·ñÓÃMPU6050¼ì²âÇãĞ±½Ç£¬·ñÔòÊ¹ÓÃMMA7660£¬R1Mower_sÖĞYawAngleÊ¹ÓÃHMC5883µÄµØ´Å½Ç¡£
+#define USE_MPU6050   //è®¾ç½®æ˜¯å¦ç”¨MPU6050æ£€æµ‹å€¾æ–œè§’ï¼Œå¦åˆ™ä½¿ç”¨MMA7660ï¼ŒR1Mower_sä¸­YawAngleä½¿ç”¨HMC5883çš„åœ°ç£è§’ã€‚
 
-#define R1_BAT_VOL_AD_RATIO 11 //µç³ØµçÑ¹AD²É¼¯·ÖÑ¹±È
-#define R1_BAT_VOL_MAX 28000 //µç³ØµçÑ¹×î´óÖµ£¬µ¥Î»mV
-#define R1_BAT_VOL_MIN 22000 //µç³ØµçÑ¹×îĞ¡Öµ£¬µ¥Î»mV
+#define R1_BAT_VOL_AD_RATIO 11 //ç”µæ± ç”µå‹ADé‡‡é›†åˆ†å‹æ¯”
+#define R1_BAT_VOL_MAX 28000 //ç”µæ± ç”µå‹æœ€å¤§å€¼ï¼Œå•ä½mV
+#define R1_BAT_VOL_MIN 22000 //ç”µæ± ç”µå‹æœ€å°å€¼ï¼Œå•ä½mV
 
 
-//´íÎó×´Ì¬
+//é”™è¯¯çŠ¶æ€
 #define FAIL_FLAG_BS_TO 0x0001
 #define FAIL_FLAG_SS_TO 0x0002
 #define FAIL_FLAG_MT_TO 0x0004
 #define FAIL_FLAG_MT_OT 0x0008
 #define FAIL_FLAG_MT_OC 0x0010
-#define FAIL_FLAG_BS_RF 0x0020 //BSÎŞÏß²»Õı³£
-#define FAIL_FLAG_BS_WI 0x0040 //BS½ÓÊÕµçÀÂ¶Ï
+#define FAIL_FLAG_BS_RF 0x0020 //BSæ— çº¿ä¸æ­£å¸¸
+#define FAIL_FLAG_BS_WI 0x0040 //BSæ¥æ”¶ç”µç¼†æ–­
 
 #define FAIL_FLAG_HMC5883_TO 0x0100
 #define FAIL_FLAG_MPU6050_TO 0x0080
 #define FAIL_FLAG_MMA7660_TO 0x0200
 
-//³£Á¿¶¨Òå
+//å¸¸é‡å®šä¹‰
 #define BAT_LOW_LIMIT 50
-#define MOW_SPEED_H 35	//¸ßËÙ¶È
-#define MOW_SPEED_M 25	//ÖĞËÙ¶È
-#define MOW_SPEED_L 15	//µÍËÙ¶È
-#define BLADE_SPEED 110 //µ¶Æ¬ËÙ¶È
+#define MOW_SPEED_H 35	//é«˜é€Ÿåº¦
+#define MOW_SPEED_M 25	//ä¸­é€Ÿåº¦
+#define MOW_SPEED_L 15	//ä½é€Ÿåº¦
+#define BLADE_SPEED 110 //åˆ€ç‰‡é€Ÿåº¦
 
 #define BS_STRENGTH_H 80
 #define BS_STRENGTH_M 50
@@ -43,22 +43,22 @@
 
 struct R1_RunParam_s
 {
-  uint8_t DrvSpeedH;   //Çı¶¯µç»ú¸ßËÙµµ
-  uint8_t DrvSpeedM;	//Çı¶¯µç»úÖĞËÙµµ
-  uint8_t DrvSpeedL;	//Çı¶¯µç»úµÍËÙµµ
-  uint8_t BladeSpeed;	//¸î²İµç»úËÙ¶È
-  uint8_t BsStrenghH;	//±ß½çĞÅºÅÇ¿¶È¸ß
-  uint8_t BsStrenghM;	//±ß½çĞÅºÅÇ¿¶ÈÖĞ
-	uint8_t BsStrenghL;	//±ß½çĞÅºÅÇ¿¶ÈµÍ
-	uint8_t PowerLimit;	//µç³ØÊ£ÓàµçÁ¿°Ù·Ö±È±¨¾¯Öµ
-	float KP1;	//¸ú×Ùµ÷ÕûPÖµ
-	float KD1;	//¸ú×Ùµ÷ÕûDÖµ
-	float KI1;	//¸ú×Ùµ÷ÕûIÖµ
-	float KP2;	//¸ú×Ùµ÷ÕûPÖµ
-	float KD2;	//¸ú×Ùµ÷ÕûDÖµ
-	float KI2;	//¸ú×Ùµ÷ÕûIÖµ
-	uint16_t BehaviorTO;  //µ¥Ò»ĞĞÎª³¬Ê±Ê±¼ä£¬µ¥Î»£ºÃë£¬¼´³¬¹ı¸ÃÊ±¼äÔò½áÊøµ±Ç°ĞĞÎª
-	uint16_t MotionSense;  //Åö×²ÁéÃô¶È£¬µ¥Î»£ººÁÖØÁ¦µ¥Î»mg£¬µäĞÍÖµ640£»
+  uint8_t DrvSpeedH;   //é©±åŠ¨ç”µæœºé«˜é€Ÿæ¡£
+  uint8_t DrvSpeedM;	//é©±åŠ¨ç”µæœºä¸­é€Ÿæ¡£
+  uint8_t DrvSpeedL;	//é©±åŠ¨ç”µæœºä½é€Ÿæ¡£
+  uint8_t BladeSpeed;	//å‰²è‰ç”µæœºé€Ÿåº¦
+  uint8_t BsStrenghH;	//è¾¹ç•Œä¿¡å·å¼ºåº¦é«˜
+  uint8_t BsStrenghM;	//è¾¹ç•Œä¿¡å·å¼ºåº¦ä¸­
+	uint8_t BsStrenghL;	//è¾¹ç•Œä¿¡å·å¼ºåº¦ä½
+	uint8_t PowerLimit;	//ç”µæ± å‰©ä½™ç”µé‡ç™¾åˆ†æ¯”æŠ¥è­¦å€¼
+	float KP1;	//è·Ÿè¸ªè°ƒæ•´På€¼
+	float KD1;	//è·Ÿè¸ªè°ƒæ•´Då€¼
+	float KI1;	//è·Ÿè¸ªè°ƒæ•´Iå€¼
+	float KP2;	//è·Ÿè¸ªè°ƒæ•´På€¼
+	float KD2;	//è·Ÿè¸ªè°ƒæ•´Då€¼
+	float KI2;	//è·Ÿè¸ªè°ƒæ•´Iå€¼
+	uint16_t BehaviorTO;  //å•ä¸€è¡Œä¸ºè¶…æ—¶æ—¶é—´ï¼Œå•ä½ï¼šç§’ï¼Œå³è¶…è¿‡è¯¥æ—¶é—´åˆ™ç»“æŸå½“å‰è¡Œä¸º
+	uint16_t MotionSense;  //ç¢°æ’çµæ•åº¦ï¼Œå•ä½ï¼šæ¯«é‡åŠ›å•ä½mgï¼Œå…¸å‹å€¼640ï¼›
 };
 
 struct R1_WorkTime_s
@@ -72,74 +72,74 @@ struct R1_WorkTime_s
 
 struct R1Mower_s
 {
-	uint8_t WorkMode; //µ±Ç°¹¤×÷Ä£Ê½£¬0-Ëæ»ú×Ô¶¯£¬1-ÊÖ¶¯£¬2-»Ø¼Ò£¬3-Íù¸´×Ô¶¯
-	uint8_t Power; //Ê£ÓàµçÁ¿°Ù·Ö±È
-	//uint8_t LCDClosed; //LCDÊÇ·ñ¹Ø±Õ 1 ¹Ø±Õ£¬0-´ò¿ª
-	int8_t Temperature;//µ±Ç°ÎÂ¶È£¬µ¥Î»£ºÉãÊÏ¶È
-	uint16_t BatVoltage; //µç³ØµçÑ¹£¬µ¥Î»£ººÁ·ü
+	uint8_t WorkMode; //å½“å‰å·¥ä½œæ¨¡å¼ï¼Œ0-éšæœºè‡ªåŠ¨ï¼Œ1-æ‰‹åŠ¨ï¼Œ2-å›å®¶ï¼Œ3-å¾€å¤è‡ªåŠ¨
+	uint8_t Power; //å‰©ä½™ç”µé‡ç™¾åˆ†æ¯”
+	//uint8_t LCDClosed; //LCDæ˜¯å¦å…³é—­ 1 å…³é—­ï¼Œ0-æ‰“å¼€
+	int8_t Temperature;//å½“å‰æ¸©åº¦ï¼Œå•ä½ï¼šæ‘„æ°åº¦
+	uint16_t BatVoltage; //ç”µæ± ç”µå‹ï¼Œå•ä½ï¼šæ¯«ä¼
 	
-	uint8_t MT_STATUS_L; 	//MT×´Ì¬Î»L¡£
-												//D0¼±Í£×´Ì¬£¬1ÎªÕæ£»
-												//D1ÔİÍ£×´Ì¬£¬1ÎªÕæ£»
-												//D2±íÊ¾¹ıÁ÷×´Ì¬£¬1ÎªÕæ£»
-												//D3±íÊ¾¹ıÈÈ×´Ì¬£¬1ÎªÕæ£»
-												//D4±íÊ¾×óÂÖÕı·´×ª£¬0ÎªÕı×ª£¬1Îª·´×ª£»
-												//D5±íÊ¾ÓÒÂÖÕı·´×ª£¬0ÎªÕı×ª£¬1Îª·´×ª£»
-												//D6±íÊ¾Çı¶¯µç»ú¹¤×÷×´Ì¬£¬1Îª¹¤×÷£¬0ÎªÍ£Ö¹¡£
-												//D7=0Ê¼ÖÕÎª0
+	uint8_t MT_STATUS_L; 	//MTçŠ¶æ€ä½Lã€‚
+												//D0æ€¥åœçŠ¶æ€ï¼Œ1ä¸ºçœŸï¼›
+												//D1æš‚åœçŠ¶æ€ï¼Œ1ä¸ºçœŸï¼›
+												//D2è¡¨ç¤ºè¿‡æµçŠ¶æ€ï¼Œ1ä¸ºçœŸï¼›
+												//D3è¡¨ç¤ºè¿‡çƒ­çŠ¶æ€ï¼Œ1ä¸ºçœŸï¼›
+												//D4è¡¨ç¤ºå·¦è½®æ­£åè½¬ï¼Œ0ä¸ºæ­£è½¬ï¼Œ1ä¸ºåè½¬ï¼›
+												//D5è¡¨ç¤ºå³è½®æ­£åè½¬ï¼Œ0ä¸ºæ­£è½¬ï¼Œ1ä¸ºåè½¬ï¼›
+												//D6è¡¨ç¤ºé©±åŠ¨ç”µæœºå·¥ä½œçŠ¶æ€ï¼Œ1ä¸ºå·¥ä½œï¼Œ0ä¸ºåœæ­¢ã€‚
+												//D7=0å§‹ç»ˆä¸º0
 
-	uint8_t MT_STATUS_H; 	//MT×´Ì¬Î»H
-												// D0Î´¶¨Òå
-												// D1Î´¶¨Òå
-												// D2Î´¶¨Òå
-												// D3Î´¶¨Òå
-												// D4Î´¶¨Òå
-												// D5Î´¶¨Òå
-												// D6±íÊ¾¸î²İµç»ú¹¤×÷×´Ì¬£¬1Îª¹¤×÷£¬0ÎªÍ£Ö¹¡£
-												// D7=0Ê¼ÖÕÎª0
+	uint8_t MT_STATUS_H; 	//MTçŠ¶æ€ä½H
+												// D0æœªå®šä¹‰
+												// D1æœªå®šä¹‰
+												// D2æœªå®šä¹‰
+												// D3æœªå®šä¹‰
+												// D4æœªå®šä¹‰
+												// D5æœªå®šä¹‰
+												// D6è¡¨ç¤ºå‰²è‰ç”µæœºå·¥ä½œçŠ¶æ€ï¼Œ1ä¸ºå·¥ä½œï¼Œ0ä¸ºåœæ­¢ã€‚
+												// D7=0å§‹ç»ˆä¸º0
 
-	uint8_t SS_STATUS_L; 	//SS×´Ì¬Î»L
-												//D0~D3Åö×²¼ì²â£ºD0Ç°·½£»D1ºó·½£»D2×ó·½£»D3ÓÒ·½
-												//D4±íÊ¾ÀëµØ×´Ì¬£¬1ÎªÕæ
-												//D5±íÊ¾ÓêÁÜ×´Ì¬£¬1ÎªÕæ
-												//D6±íÊ¾ÓĞ³äµçµçÑ¹×´Ì¬£¬1ÎªÕæ
-	uint8_t SS_STATUS_H; //SS×´Ì¬Î»H
-	uint8_t SS_ERROR_L; //SS´íÎóÎ»L
-											//D0±íÊ¾I2CÍ¨Ñ¶¹ÊÕÏ£¬1ÎªÕæ
-											//D1±íÊ¾µç³Ø×´Ì¬¹ÊÕÏ£¬1ÎªÕæ£¨ÈçÎÂ¶È±£»¤£¬½¡¿µ×´Ì¬£©
-											//D2±íÊ¾ÖØÁ¦´«¸ĞÆ÷¹ÊÕÏ£¬1ÎªÕæ
-											//D3±íÊ¾º½Ïò´«¸ĞÆ÷¹ÊÕÏ£¬1ÎªÕæ
-											//D4±íÊ¾Åö×²´«¸ĞÆ÷¹ÊÕÏ£¬1ÎªÕæ
+	uint8_t SS_STATUS_L; 	//SSçŠ¶æ€ä½L
+												//D0~D3ç¢°æ’æ£€æµ‹ï¼šD0å‰æ–¹ï¼›D1åæ–¹ï¼›D2å·¦æ–¹ï¼›D3å³æ–¹
+												//D4è¡¨ç¤ºç¦»åœ°çŠ¶æ€ï¼Œ1ä¸ºçœŸ
+												//D5è¡¨ç¤ºé›¨æ·‹çŠ¶æ€ï¼Œ1ä¸ºçœŸ
+												//D6è¡¨ç¤ºæœ‰å……ç”µç”µå‹çŠ¶æ€ï¼Œ1ä¸ºçœŸ
+	uint8_t SS_STATUS_H; //SSçŠ¶æ€ä½H
+	uint8_t SS_ERROR_L; //SSé”™è¯¯ä½L
+											//D0è¡¨ç¤ºI2Cé€šè®¯æ•…éšœï¼Œ1ä¸ºçœŸ
+											//D1è¡¨ç¤ºç”µæ± çŠ¶æ€æ•…éšœï¼Œ1ä¸ºçœŸï¼ˆå¦‚æ¸©åº¦ä¿æŠ¤ï¼Œå¥åº·çŠ¶æ€ï¼‰
+											//D2è¡¨ç¤ºé‡åŠ›ä¼ æ„Ÿå™¨æ•…éšœï¼Œ1ä¸ºçœŸ
+											//D3è¡¨ç¤ºèˆªå‘ä¼ æ„Ÿå™¨æ•…éšœï¼Œ1ä¸ºçœŸ
+											//D4è¡¨ç¤ºç¢°æ’ä¼ æ„Ÿå™¨æ•…éšœï¼Œ1ä¸ºçœŸ
 											
-// 	uint8_t BS_STATUS_L; //BS×´Ì¬Î»L
-// 	uint8_t BS_STATUS_H; //BS×´Ì¬Î»H
-	uint8_t BS_WI_STATUS; //±ß½çµçÀÂ×´Ì¬£¬D7~D4£ºµçÀÂ3~0µÄÍ¨¶ÏÇé¿ö£¬1Õı³££¬0¶Ï¿ª£»D3~D0£¬µçÀÂ3~0ÓëµçÀÂ0µÄÏàÎ»¹ØÏµ£¬0Í¬Ïò£¬1·´Ïò
+// 	uint8_t BS_STATUS_L; //BSçŠ¶æ€ä½L
+// 	uint8_t BS_STATUS_H; //BSçŠ¶æ€ä½H
+	uint8_t BS_WI_STATUS; //è¾¹ç•Œç”µç¼†çŠ¶æ€ï¼ŒD7~D4ï¼šç”µç¼†3~0çš„é€šæ–­æƒ…å†µï¼Œ1æ­£å¸¸ï¼Œ0æ–­å¼€ï¼›D3~D0ï¼Œç”µç¼†3~0ä¸ç”µç¼†0çš„ç›¸ä½å…³ç³»ï¼Œ0åŒå‘ï¼Œ1åå‘
 	
 
-	uint16_t MCU_STATUS; //MCU16Î»×´Ì¬×Ö
-	uint16_t FAIL_FLAG;  //¹ÊÕÏ±êÖ¾,1ÓĞ¹ÊÕÏ£¬0ÎŞ¹ÊÕÏ
+	uint16_t MCU_STATUS; //MCU16ä½çŠ¶æ€å­—
+	uint16_t FAIL_FLAG;  //æ•…éšœæ ‡å¿—,1æœ‰æ•…éšœï¼Œ0æ— æ•…éšœ
 	
-	int8_t LeftSpeed, RightSpeed;  //µ±Ç°×óÓÒÂÖËÙ¶ÈÖµ -63~64
-	int8_t LastLeftSpeed, LastRightSpeed;  //ÉÏÒ»´Î×óÓÒÂÖËÙ¶ÈÖµ -63~64
+	int8_t LeftSpeed, RightSpeed;  //å½“å‰å·¦å³è½®é€Ÿåº¦å€¼ -63~64
+	int8_t LastLeftSpeed, LastRightSpeed;  //ä¸Šä¸€æ¬¡å·¦å³è½®é€Ÿåº¦å€¼ -63~64
 	
-	int16_t BSStrength[4]; //Í¨µÀ0~3µÄ±ß½çĞÅºÅÇ¿¶È
-	int16_t BorderStrength; //±ß½çÇ¿¶È£¬¸ù¾İÉÏÊöÍ¨µÀÇ¿¶ÈÀ´¼ÆËã£¬µ÷ÓÃUpdateBorderStrength()º¯ÊıÀ´¸üĞÂ¡£
+	int16_t BSStrength[4]; //é€šé“0~3çš„è¾¹ç•Œä¿¡å·å¼ºåº¦
+	int16_t BorderStrength; //è¾¹ç•Œå¼ºåº¦ï¼Œæ ¹æ®ä¸Šè¿°é€šé“å¼ºåº¦æ¥è®¡ç®—ï¼Œè°ƒç”¨UpdateBorderStrength()å‡½æ•°æ¥æ›´æ–°ã€‚
 	
-	float RollAngle; //ºá¹ö½Ç£»µ¥Î»£º¶È
-	float PitchAngle; //¸©Ñö½Ç£»µ¥Î»£º¶È
-	float TiltAngle;  //ÇãĞ±½Ç£»µ¥Î»£º¶È
-	float YawAngle; //º½Ïò½Ç£»µ¥Î»£º¶È
+	float RollAngle; //æ¨ªæ»šè§’ï¼›å•ä½ï¼šåº¦
+	float PitchAngle; //ä¿¯ä»°è§’ï¼›å•ä½ï¼šåº¦
+	float TiltAngle;  //å€¾æ–œè§’ï¼›å•ä½ï¼šåº¦
+	float YawAngle; //èˆªå‘è§’ï¼›å•ä½ï¼šåº¦
 	
-	float TargetAngle; //Ä¿±êº½Ïò½Ç£»µ¥Î»£º¶È
-	uint8_t TurnDir; //×ªÏò¿ØÖÆ£¬D0=0Ë³Ê±Õë£¬=1ÄæÊ±Õë£»D1=0 ¹Ì¶¨½Ç¶È =1 Ëæ»ú½Ç¶È£»D2=0 ¹Ì¶¨½Ç¶È180¶È£¬=1¹Ì¶¨½Ç¶È90¶È
+	float TargetAngle; //ç›®æ ‡èˆªå‘è§’ï¼›å•ä½ï¼šåº¦
+	uint8_t TurnDir; //è½¬å‘æ§åˆ¶ï¼ŒD0=0é¡ºæ—¶é’ˆï¼Œ=1é€†æ—¶é’ˆï¼›D1=0 å›ºå®šè§’åº¦ =1 éšæœºè§’åº¦ï¼›D2=0 å›ºå®šè§’åº¦180åº¦ï¼Œ=1å›ºå®šè§’åº¦90åº¦
 	
-	struct R1_RunParam_s sRunParam; //ÔËĞĞ²ÎÊı
-	struct R1_WorkTime_s sWorkTime[7];  //ÖÜÒ»µ½ÖÜÈÕ¹¤×÷Ê±¼ä£¨Ê±£º·Ö£©
+	struct R1_RunParam_s sRunParam; //è¿è¡Œå‚æ•°
+	struct R1_WorkTime_s sWorkTime[7];  //å‘¨ä¸€åˆ°å‘¨æ—¥å·¥ä½œæ—¶é—´ï¼ˆæ—¶ï¼šåˆ†ï¼‰
 	
 	struct HMC5883_s sHMC5883;
 	struct MMA7660_s sMMA7660;
 	
-	char * FailInfo; //Ê§°ÜĞÅÏ¢
+	char * FailInfo; //å¤±è´¥ä¿¡æ¯
 	
 };
 
@@ -156,9 +156,9 @@ bool R1_is_raining(void);
 bool R1_is_charging(void);
 bool R1_is_full_charging(void);
 bool R1_is_crashing(void);
-bool R1_is_out_area(void); //ÔÚ±ß½çÍâ£¿
-bool R1_is_near_middle_line(void);   //R1ÊÇ·ñÔÚÖĞÏß¸½½ü
-uint8_t R1_is_in_which_area(void); //R1ÔÚÄÄ¸öÏßÈ¦ÄÚ£¬·µ»Ø0£¬1
+bool R1_is_out_area(void); //åœ¨è¾¹ç•Œå¤–ï¼Ÿ
+bool R1_is_near_middle_line(void);   //R1æ˜¯å¦åœ¨ä¸­çº¿é™„è¿‘
+uint8_t R1_is_in_which_area(void); //R1åœ¨å“ªä¸ªçº¿åœˆå†…ï¼Œè¿”å›0ï¼Œ1
 
 
 #endif /* __R1DEF_H */

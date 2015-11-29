@@ -3,21 +3,21 @@
 #include "usart1.h"
 #include "R1DEF.h"
 
-uint8_t cmdBuffer[CMD_BYTE_LENGTH];  //·¢ËÍÃüÁî»º³åÇø
-uint8_t cmdRec[CMD_BYTE_LENGTH]; //½ÓÊÕÃüÁî»º³åÇø
-uint8_t cSer_Flag; //´®¿Ú½ÓÊÕµ½Ó¦´ğĞÅºÅ
+uint8_t cmdBuffer[CMD_BYTE_LENGTH];  //å‘é€å‘½ä»¤ç¼“å†²åŒº
+uint8_t cmdRec[CMD_BYTE_LENGTH]; //æ¥æ”¶å‘½ä»¤ç¼“å†²åŒº
+uint8_t cSer_Flag; //ä¸²å£æ¥æ”¶åˆ°åº”ç­”ä¿¡å·
 
-//·¢ËÍ¿ØÖÆÃüÁî×Ö£¬½ÓÊÕµ½Ó¦µ½ĞÅºÅ·µ»ØÓ¦´ğ±êÖ¾£¬³¬Ê±·µ»Ø-1
+//å‘é€æ§åˆ¶å‘½ä»¤å­—ï¼Œæ¥æ”¶åˆ°åº”åˆ°ä¿¡å·è¿”å›åº”ç­”æ ‡å¿—ï¼Œè¶…æ—¶è¿”å›-1
 int8_t SendCmd(uint8_t * cmd)
 {
 			uint16_t i;
-			//ÑÓÊ±
+			//å»¶æ—¶
 			Delay_us(2);
 
-			//485·¢ËÍÊ¹ÄÜ
+			//485å‘é€ä½¿èƒ½
 			USART485_WRITE;
 	
-			//¼ÆËãĞ£Ñé×Ö
+			//è®¡ç®—æ ¡éªŒå­—
 			cmd[CMD_BYTE_LENGTH - 1] = cmd[0];
 			for(i=1;i<CMD_BYTE_LENGTH - 1;i++)
 			{
@@ -25,37 +25,37 @@ int8_t SendCmd(uint8_t * cmd)
 			}
 			cmd[CMD_BYTE_LENGTH - 1] &= 0x7F;
 			
-			//ÇåÁã´®¿Ú½ÓÊÕ»º³åÇøÒç³ö´íÎó×´Ì¬Î»
+			//æ¸…é›¶ä¸²å£æ¥æ”¶ç¼“å†²åŒºæº¢å‡ºé”™è¯¯çŠ¶æ€ä½
 // 			U2STAbits.OERR = 0;
 			
-			//·¢ËÍÃüÁî
+			//å‘é€å‘½ä»¤
 			for(i=0;i<CMD_BYTE_LENGTH;i++)
 			{
 				USART_SendData(USART1,cmd[i]);
 				while(USART_GetFlagStatus(USART1, USART_FLAG_TC)==RESET);
 			}
 			USART485_READ;
-			//µÈ´ı½ÓÊÕÓ¦´ğĞÅºÅ
+			//ç­‰å¾…æ¥æ”¶åº”ç­”ä¿¡å·
 			i=0xffff;
 			while(i>0)
 			{
-				if(cSer_Flag) //ÊÕµ½Ó¦´ğĞÅºÅ
+				if(cSer_Flag) //æ”¶åˆ°åº”ç­”ä¿¡å·
 				{
 					cSer_Flag = 0;
-					return cmdRec[CMD_BYTE_PARAM_L]; //·µ»ØÓ¦´ğĞÅºÅ±êÖ¾
+					return cmdRec[CMD_BYTE_PARAM_L]; //è¿”å›åº”ç­”ä¿¡å·æ ‡å¿—
 				}    
 				i--;
 			}
-			return -1;  //³¬Ê±·µ»Ø-1
+			return -1;  //è¶…æ—¶è¿”å›-1
 }
-//·¢ËÍ²éÑ¯ÃüÁî×Ö£¬½ÓÊÕµ½Ó¦µ½ĞÅºÅ·µ»Ø1£¬³¬Ê±·µ»Ø0
+//å‘é€æŸ¥è¯¢å‘½ä»¤å­—ï¼Œæ¥æ”¶åˆ°åº”åˆ°ä¿¡å·è¿”å›1ï¼Œè¶…æ—¶è¿”å›0
 int8_t QueryCmd(uint8_t * cmd)
 {
 			if( SendCmd(cmd) == -1) return 0;
 			else return 1;
 }
 
-//ËÙ¶ÈÉèÖÃÃüÁî
+//é€Ÿåº¦è®¾ç½®å‘½ä»¤
 int8_t SetDriverSpeed(int8_t nLeft,int8_t nRight)
 {
 	if(nLeft < -63 || nLeft > 64 || nRight < -63 || nRight > 64)
@@ -72,7 +72,7 @@ int8_t SetDriverSpeed(int8_t nLeft,int8_t nRight)
 	return SendCmd(cmdBuffer);
 }
 
-//Æô¶¯Í£Ö¹µç»úÇı¶¯£¬nOn=1Æô¶¯£¬nOn=0Í£Ö¹
+//å¯åŠ¨åœæ­¢ç”µæœºé©±åŠ¨ï¼ŒnOn=1å¯åŠ¨ï¼ŒnOn=0åœæ­¢
 int8_t EnableDriver(int8_t nOn)
 {
 	cmdBuffer[CMD_BYTE_TAR] = MT_ADDR;
@@ -84,7 +84,7 @@ int8_t EnableDriver(int8_t nOn)
 	return SendCmd(cmdBuffer);
 }
 
-//¸î²İµç»úËÙ¶ÈÉèÖÃÃüÁî
+//å‰²è‰ç”µæœºé€Ÿåº¦è®¾ç½®å‘½ä»¤
 int8_t SetMowSpeed(uint8_t nSpeed)
 {
 		if(nSpeed > 0x7F) nSpeed = 0x7F;
@@ -97,7 +97,7 @@ int8_t SetMowSpeed(uint8_t nSpeed)
 		return SendCmd(cmdBuffer);
 }
 
-//²éÑ¯MTÄ£¿é×´Ì¬
+//æŸ¥è¯¢MTæ¨¡å—çŠ¶æ€
 int8_t QueryMTStatus(uint8_t cType)
 {
 	cmdBuffer[CMD_BYTE_TAR] = MT_ADDR;

@@ -1,8 +1,8 @@
 #ifndef __TFT_H
 #define __TFT_H
 
-#define Bank1_LCD_D    ((uint32_t)0x60020000)    //显示区数据地址	  
-#define Bank1_LCD_C    ((uint32_t)0x60000000)	 //显示区指令地址
+#define Bank1_LCD_D    ((uint32_t)0x60020000)    //鏄剧ず鍖烘暟鎹湴鍧�	  
+#define Bank1_LCD_C    ((uint32_t)0x60000000)	 //鏄剧ず鍖烘寚浠ゅ湴鍧�
 
 #include "stm32f10x_fsmc.h"
 

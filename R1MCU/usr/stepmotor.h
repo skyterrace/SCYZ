@@ -1,7 +1,7 @@
 #ifndef __STEPMOTOR_H
 #define __STEPMOTOR_H
 #include "stm32f10x.h"
-#define SYSCLK 48000000  //Ê¹ÓÃÄÚ²¿Ê±ÖÓ£¬48MHz£¬ÔÚRcc_ConfigurationÖĞÅäÖÃ
+#define SYSCLK 48000000  //ä½¿ç”¨å†…éƒ¨æ—¶é’Ÿï¼Œ48MHzï¼Œåœ¨Rcc_Configurationä¸­é…ç½®
 
 
 #define STEP_MOTOR_FREQ 6400  //divided by 100 and save in sR1Mower.sRunParam.BladeSpeed
@@ -24,7 +24,7 @@
 #define MOTOR_Y2_DIR_FWD GPIO_SetBits(GPIOB,GPIO_Pin_2);
 #define MOTOR_Y2_DIR_REV GPIO_ResetBits(GPIOB,GPIO_Pin_2);
 
-//³ß´ç²ÎÊı
+//å°ºå¯¸å‚æ•°
 #define MOTOR_X_GEAR_COUNT 20   //axis x gear count
 #define MOTOR_X_GEAR_DIS 8   //unit:mm
 #define MOTOR_X_GEAR_RATIO 10

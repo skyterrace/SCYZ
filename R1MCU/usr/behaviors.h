@@ -1,7 +1,7 @@
 #ifndef __BEHAVIORS_H
 #define __BEHAVIORS_H
 #include "stm32f10x.h"
-//¶¨Òå×´Ì¬
+//å®šä¹‰çŠ¶æ€
 #define R1_STOP 0x0001
 #define R1_FAIL 0x0002
 #define R1_MANUAL 0x0004
@@ -17,12 +17,12 @@
 #define R1_FOLLOW 0x1000
 
 #define R1_AUTOWORK (R1_GOOUT|R1_PREPARE|R1_MOW|R1_TURN|R1_AVOID|R1_LOOK|R1_FOLLOW)
-//¶¨Òå×´Ì¬½áÊø
+//å®šä¹‰çŠ¶æ€ç»“æŸ
 
 bool R1_CheckEvent(uint16_t R1Status);
 void R1_SwitchToBehavior(uint16_t R1Status);
 void R1_ExcecuteActions(void);
-void R1_ManualControl(void); //ÊÖ¶¯¿ØÖÆ
+void R1_ManualControl(void); //æ‰‹åŠ¨æ§åˆ¶
 void R1_BehaviorTimeElapse(void);
 
 #endif

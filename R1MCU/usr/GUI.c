@@ -7,10 +7,10 @@
 #include "eeprom.h"
 #include "R1DEF.h"
 #include "key.h"
-//´ÓILI93xx¶Á³öµÄÊı¾İÎªGBR¸ñÊ½£¬¶øÎÒÃÇĞ´ÈëµÄÊ±ºòÎªRGB¸ñÊ½¡£
-//Í¨¹ı¸Ãº¯Êı×ª»»
-//c:GBR¸ñÊ½µÄÑÕÉ«Öµ
-//·µ»ØÖµ£ºRGB¸ñÊ½µÄÑÕÉ«Öµ
+//ä»ILI93xxè¯»å‡ºçš„æ•°æ®ä¸ºGBRæ ¼å¼ï¼Œè€Œæˆ‘ä»¬å†™å…¥çš„æ—¶å€™ä¸ºRGBæ ¼å¼ã€‚
+//é€šè¿‡è¯¥å‡½æ•°è½¬æ¢
+//c:GBRæ ¼å¼çš„é¢œè‰²å€¼
+//è¿”å›å€¼ï¼šRGBæ ¼å¼çš„é¢œè‰²å€¼
 u16 LCD_BGR2RGB(u16 c)
 {
   u16  r,g,b,rgb;   
@@ -26,7 +26,7 @@ u16 LCD_BGR2RGB(u16 c)
 
 
 void Gui_Circle(u16 X,u16 Y,u16 R,u16 fc) 
-{//BresenhamËã·¨ 
+{//Bresenhamç®—æ³• 
     unsigned short  a,b; 
     int c; 
     a=0; 
@@ -64,7 +64,7 @@ void Gui_Circle(u16 X,u16 Y,u16 R,u16 fc)
     } 
 	
 } 
-//»­Ïßº¯Êı£¬Ê¹ÓÃBresenham »­ÏßËã·¨
+//ç”»çº¿å‡½æ•°ï¼Œä½¿ç”¨Bresenham ç”»çº¿ç®—æ³•
 void Gui_DrawLine(u16 x0, u16 y0,u16 x1, u16 y1,u16 Color)   
 {
 int dx,             // difference in x's
@@ -78,8 +78,8 @@ int dx,             // difference in x's
 
 
 	Lcd_SetXY(x0,y0);
-	dx = x1-x0;//¼ÆËãx¾àÀë
-	dy = y1-y0;//¼ÆËãy¾àÀë
+	dx = x1-x0;//è®¡ç®—xè·ç¦»
+	dy = y1-y0;//è®¡ç®—yè·ç¦»
 
 	if (dx>=0)
 	{
@@ -104,35 +104,35 @@ int dx,             // difference in x's
 	dx2 = dx << 1;
 	dy2 = dy << 1;
 
-	if (dx > dy)//x¾àÀë´óÓÚy¾àÀë£¬ÄÇÃ´Ã¿¸öxÖáÉÏÖ»ÓĞÒ»¸öµã£¬Ã¿¸öyÖáÉÏÓĞÈô¸É¸öµã
-	{//ÇÒÏßµÄµãÊıµÈÓÚx¾àÀë£¬ÒÔxÖáµİÔö»­µã
+	if (dx > dy)//xè·ç¦»å¤§äºyè·ç¦»ï¼Œé‚£ä¹ˆæ¯ä¸ªxè½´ä¸Šåªæœ‰ä¸€ä¸ªç‚¹ï¼Œæ¯ä¸ªyè½´ä¸Šæœ‰è‹¥å¹²ä¸ªç‚¹
+	{//ä¸”çº¿çš„ç‚¹æ•°ç­‰äºxè·ç¦»ï¼Œä»¥xè½´é€’å¢ç”»ç‚¹
 		// initialize error term
 		error = dy2 - dx; 
 
 		// draw the line
-		for (index=0; index <= dx; index++)//Òª»­µÄµãÊı²»»á³¬¹ıx¾àÀë
+		for (index=0; index <= dx; index++)//è¦ç”»çš„ç‚¹æ•°ä¸ä¼šè¶…è¿‡xè·ç¦»
 		{
-			//»­µã
+			//ç”»ç‚¹
 			Gui_DrawPoint(x0,y0,Color);
 			
 			// test if error has overflowed
-			if (error >= 0) //ÊÇ·ñĞèÒªÔö¼Óy×ø±êÖµ
+			if (error >= 0) //æ˜¯å¦éœ€è¦å¢åŠ yåæ ‡å€¼
 			{
 				error-=dx2;
 
 				// move to next line
-				y0+=y_inc;//Ôö¼Óy×ø±êÖµ
+				y0+=y_inc;//å¢åŠ yåæ ‡å€¼
 			} // end if error overflowed
 
 			// adjust the error term
 			error+=dy2;
 
 			// move to the next pixel
-			x0+=x_inc;//x×ø±êÖµÃ¿´Î»­µãºó¶¼µİÔö1
+			x0+=x_inc;//xåæ ‡å€¼æ¯æ¬¡ç”»ç‚¹åéƒ½é€’å¢1
 		} // end for
 	} // end if |slope| <= 1
-	else//yÖá´óÓÚxÖá£¬ÔòÃ¿¸öyÖáÉÏÖ»ÓĞÒ»¸öµã£¬xÖáÈô¸É¸öµã
-	{//ÒÔyÖáÎªµİÔö»­µã
+	else//yè½´å¤§äºxè½´ï¼Œåˆ™æ¯ä¸ªyè½´ä¸Šåªæœ‰ä¸€ä¸ªç‚¹ï¼Œxè½´è‹¥å¹²ä¸ªç‚¹
+	{//ä»¥yè½´ä¸ºé€’å¢ç”»ç‚¹
 		// initialize error term
 		error = dx2 - dy; 
 
@@ -194,9 +194,9 @@ void Gui_box2(u16 x,u16 y,u16 w,u16 h, u8 mode)
 
 
 /**************************************************************************************
-¹¦ÄÜÃèÊö: ÔÚÆÁÄ»ÏÔÊ¾Ò»Í¹ÆğµÄ°´Å¥¿ò
-Êä    Èë: u16 x1,y1,x2,y2 °´Å¥¿ò×óÉÏ½ÇºÍÓÒÏÂ½Ç×ø±ê
-Êä    ³ö: ÎŞ
+åŠŸèƒ½æè¿°: åœ¨å±å¹•æ˜¾ç¤ºä¸€å‡¸èµ·çš„æŒ‰é’®æ¡†
+è¾“    å…¥: u16 x1,y1,x2,y2 æŒ‰é’®æ¡†å·¦ä¸Šè§’å’Œå³ä¸‹è§’åæ ‡
+è¾“    å‡º: æ— 
 **************************************************************************************/
 void DisplayButtonDown(u16 x1,u16 y1,u16 x2,u16 y2)
 {
@@ -209,9 +209,9 @@ void DisplayButtonDown(u16 x1,u16 y1,u16 x2,u16 y2)
 }
 
 /**************************************************************************************
-¹¦ÄÜÃèÊö: ÔÚÆÁÄ»ÏÔÊ¾Ò»°¼ÏÂµÄ°´Å¥¿ò
-Êä    Èë: u16 x1,y1,x2,y2 °´Å¥¿ò×óÉÏ½ÇºÍÓÒÏÂ½Ç×ø±ê
-Êä    ³ö: ÎŞ
+åŠŸèƒ½æè¿°: åœ¨å±å¹•æ˜¾ç¤ºä¸€å‡¹ä¸‹çš„æŒ‰é’®æ¡†
+è¾“    å…¥: u16 x1,y1,x2,y2 æŒ‰é’®æ¡†å·¦ä¸Šè§’å’Œå³ä¸‹è§’åæ ‡
+è¾“    å‡º: æ— 
 **************************************************************************************/
 void DisplayButtonUp(u16 x1,u16 y1,u16 x2,u16 y2)
 {
@@ -487,8 +487,8 @@ void Gui_DrawFont_Num32_Int(u16 x, u16 y, u16 fc, u16 bc, int16_t num, u8 len)
 void Gui_DrawDefaultScreen(unsigned char cWorkMode)
 {
 	Lcd_Clear(GRAY0);
-//	Gui_DrawFont_GBK32(16,6,BLUE,GRAY0,"³¤¶È£º");
-//	Gui_DrawFont_GBK32(256,6,BLUE,GRAY0,"Ã×");
+//	Gui_DrawFont_GBK32(16,6,BLUE,GRAY0,"é•¿åº¦ï¼š");
+//	Gui_DrawFont_GBK32(256,6,BLUE,GRAY0,"ç±³");
 
 //	Gui_DrawLine(95,49,224,49,BLACK);
 //	Gui_DrawLine(95,49,95,178,BLACK);
@@ -534,12 +534,12 @@ void Gui_SetParam(void)
 	
 	set_index = 0;
 	refresh = 1;
-	//ÉèÖÃBOX_X_COUNT
+	//è®¾ç½®BOX_X_COUNT
 	
 	while(1)
 	{
-		IWDG_ReloadCounter(); //Î¹¹·
-		if(Key_Release(KEY_OK))  //°´ÏÂok¼ü
+		IWDG_ReloadCounter(); //å–‚ç‹—
+		if(Key_Release(KEY_OK))  //æŒ‰ä¸‹oké”®
 		{
 			switch(set_index)
 			{

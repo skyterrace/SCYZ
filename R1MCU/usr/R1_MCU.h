@@ -1,9 +1,9 @@
-//R1Í·ÎÄ¼ş
+//R1å¤´æ–‡ä»¶
 
 #ifndef R1_MCU_H
 #define R1_MCU_H
 
-//Î»ÉèÖÃºÍÎ»Çå³ı´úÂë
+//ä½è®¾ç½®å’Œä½æ¸…é™¤ä»£ç 
 // #define bitset(var,bitno) ((var) |= (1<<(bitno)))
 // #define bitclr(var,bitno) ((var) &= ~(1<<(bitno)))
 
@@ -14,20 +14,20 @@
 
 
 
-//BSÉèÖÃÃüÁî
+//BSè®¾ç½®å‘½ä»¤
 #define BS_CMD_SET_SIG_GEN 0x11
 #define BS_CMD_SET_RF_ON 0x12
 
-//BS×´Ì¬²éÑ¯ÃüÁî
+//BSçŠ¶æ€æŸ¥è¯¢å‘½ä»¤
 #define BS_CMD_QUERY_STATUS 0x20
 #define BS_CMD_QUERY_STATUS_CH12 0x21
 #define BS_CMD_QUERY_STATUS_CH34 0x22
 #define BS_CMD_QUERY_STATUS_VALUE 0x41
 
-//SSÉèÖÃÃüÁî
+//SSè®¾ç½®å‘½ä»¤
 #define SS_CMD_SET_BAT_LOW 0x11
 
-//SS×´Ì¬²éÑ¯ÃüÁî
+//SSçŠ¶æ€æŸ¥è¯¢å‘½ä»¤
 #define SS_CMD_QUERY_STATUS 0x20
 #define SS_CMD_QUERY_STATUS_VALUE 0x21
 #define SS_CMD_QUERY_ERROR_VALUE 0x22
@@ -37,47 +37,47 @@
 
 
 
-//MCU×´Ì¬¶¨Òå
-#define MCU_STA_CHA 0x0001  //16Î»×´Ì¬×Ö-³äµç
-#define MCU_STA_MOW 0x0002	//16Î»×´Ì¬×Ö-×Ô¶¯¸î²İ
-#define MCU_STA_OBS 0x0004	//16Î»×´Ì¬×Ö-±ÜÕÏ
-#define MCU_STA_TUR 0x0008	//16Î»×´Ì¬×Ö-µ÷Í·
-#define MCU_STA_LOO 0x0010	//16Î»×´Ì¬×Ö-Ñ°ÕÒµ¼ÒıÏß
-#define MCU_STA_FOL 0x0020	//16Î»×´Ì¬×Ö-ÑØµ¼Ïß×ß
-#define MCU_STA_STP 0x0040	//16Î»×´Ì¬×Ö-Í£Ö¹
-#define MCU_STA_SET 0x0080	//16Î»×´Ì¬×Ö-ÉèÖÃÊ±¼äºÍ¹¤×÷Ê±¼ä
-#define MCU_STA_MAN 0x0100	//16Î»×´Ì¬×Ö-ÊÖ¶¯
-#define MCU_STA_FAL 0x0200	//16Î»×´Ì¬×Ö-¹ÊÕÏÍ£Ö¹
+//MCUçŠ¶æ€å®šä¹‰
+#define MCU_STA_CHA 0x0001  //16ä½çŠ¶æ€å­—-å……ç”µ
+#define MCU_STA_MOW 0x0002	//16ä½çŠ¶æ€å­—-è‡ªåŠ¨å‰²è‰
+#define MCU_STA_OBS 0x0004	//16ä½çŠ¶æ€å­—-é¿éšœ
+#define MCU_STA_TUR 0x0008	//16ä½çŠ¶æ€å­—-è°ƒå¤´
+#define MCU_STA_LOO 0x0010	//16ä½çŠ¶æ€å­—-å¯»æ‰¾å¯¼å¼•çº¿
+#define MCU_STA_FOL 0x0020	//16ä½çŠ¶æ€å­—-æ²¿å¯¼çº¿èµ°
+#define MCU_STA_STP 0x0040	//16ä½çŠ¶æ€å­—-åœæ­¢
+#define MCU_STA_SET 0x0080	//16ä½çŠ¶æ€å­—-è®¾ç½®æ—¶é—´å’Œå·¥ä½œæ—¶é—´
+#define MCU_STA_MAN 0x0100	//16ä½çŠ¶æ€å­—-æ‰‹åŠ¨
+#define MCU_STA_FAL 0x0200	//16ä½çŠ¶æ€å­—-æ•…éšœåœæ­¢
 
-#define MOW_SPEED_H 35	//¸ßËÙ¶È
-#define MOW_SPEED_M 25	//ÖĞËÙ¶È
-#define MOW_SPEED_L 15	//µÍËÙ¶È
-#define BLADE_SPEED 110 //µ¶Æ¬ËÙ¶È
+#define MOW_SPEED_H 35	//é«˜é€Ÿåº¦
+#define MOW_SPEED_M 25	//ä¸­é€Ÿåº¦
+#define MOW_SPEED_L 15	//ä½é€Ÿåº¦
+#define BLADE_SPEED 110 //åˆ€ç‰‡é€Ÿåº¦
 
 #define BS_STRENGTH_H 80
 #define BS_STRENGTH_M 50
 #define BS_STRENGTH_L 20
 
-//´íÎó×´Ì¬
+//é”™è¯¯çŠ¶æ€
 #define FAIL_FLAG_BS_TO 0x0001
 #define FAIL_FLAG_SS_TO 0x0002
 #define FAIL_FLAG_MT_TO 0x0004
 #define FAIL_FLAG_MT_OT 0x0008
 #define FAIL_FLAG_MT_OC 0x0010
-#define FAIL_FLAG_BS_RF 0x0020 //BSÎŞÏß²»Õı³£
-#define FAIL_FLAG_BS_WI 0x0040 //BS½ÓÊÕµçÀÂ¶Ï
+#define FAIL_FLAG_BS_RF 0x0020 //BSæ— çº¿ä¸æ­£å¸¸
+#define FAIL_FLAG_BS_WI 0x0040 //BSæ¥æ”¶ç”µç¼†æ–­
 
-//³£Á¿¶¨Òå
+//å¸¸é‡å®šä¹‰
 #define BAT_LOW_LIMIT 50
 
-//¶¯×÷¶¨Òå
-#define ACTION_STOP 0x00 //Í£Ö¹
-#define ACTION_FWD 0x01	//Ç°½ø
-#define ACTION_BACK 0x02	//ºóÍË
-#define ACTION_TL 0x04	//×ó×ª
-#define ACTION_TR 0x08	//ÓÒ×ª
+//åŠ¨ä½œå®šä¹‰
+#define ACTION_STOP 0x00 //åœæ­¢
+#define ACTION_FWD 0x01	//å‰è¿›
+#define ACTION_BACK 0x02	//åé€€
+#define ACTION_TL 0x04	//å·¦è½¬
+#define ACTION_TR 0x08	//å³è½¬
 
-//ÒÔÏÂÎªSTM32°æ±¾¶¨Òå±äÁ¿
+//ä»¥ä¸‹ä¸ºSTM32ç‰ˆæœ¬å®šä¹‰å˜é‡
 
 #include "stm32f10x.h"
 struct Param_s
