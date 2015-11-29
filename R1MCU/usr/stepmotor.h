@@ -35,8 +35,8 @@
 
 #define BOX_X_COUNT 2 //saved in sR1Mower.sRunParam.DrvSpeedL
 #define BOX_Y_COUNT 9 //saved in sR1Mower.sRunParam.BsStrenghL
-#define BOX_X_LEN 600 //unit:mm, saved in sR1Mower.sRunParam.KP1 = BOX_X_LEN/1000.0;
-#define BOX_Y_LEN 400 //unit:mm, saved in sR1Mower.sRunParam.KD1 = BOX_Y_LEN/1000.0;
+#define BOX_X_LEN 500 //unit:mm, saved in sR1Mower.sRunParam.KP1 = BOX_X_LEN/200.0;
+#define BOX_Y_LEN 300 //unit:mm, saved in sR1Mower.sRunParam.KD1 = BOX_Y_LEN/200.0;
 
 extern __IO int32_t sm_loc_x, sm_loc_y;
 extern __IO uint32_t sm_loc_x_need, sm_loc_y_need, sm_loc_y1_need, sm_loc_y2_need;

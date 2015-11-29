@@ -125,7 +125,7 @@ void SM_Goto_Box(uint8_t box_x,uint8_t box_y)
 {
 	int32_t temp;
 
-	temp = sR1Mower.sRunParam.BladeSpeed*100*MOTOR_X_GEAR_RATIO*(box_x * sR1Mower.sRunParam.KP1*1000)/(MOTOR_X_GEAR_COUNT*MOTOR_X_GEAR_DIS);
+	temp = sR1Mower.sRunParam.BladeSpeed*100*MOTOR_X_GEAR_RATIO*(box_x * sR1Mower.sRunParam.KP1*200)/(MOTOR_X_GEAR_COUNT*MOTOR_X_GEAR_DIS);
 	temp = temp-sm_loc_x;
 	if(temp>0)
 	{
@@ -138,7 +138,7 @@ void SM_Goto_Box(uint8_t box_x,uint8_t box_y)
 		sm_x_dir = 0;
 	}
 
-	temp = sR1Mower.sRunParam.BladeSpeed*100*MOTOR_Y_GEAR_RATIO*(box_y * sR1Mower.sRunParam.KD1*1000)/(MOTOR_Y_GEAR_COUNT*MOTOR_Y_GEAR_DIS);
+	temp = sR1Mower.sRunParam.BladeSpeed*100*MOTOR_Y_GEAR_RATIO*(box_y * sR1Mower.sRunParam.KD1*200)/(MOTOR_Y_GEAR_COUNT*MOTOR_Y_GEAR_DIS);
 	temp = temp-sm_loc_y;
 	if(temp>0)
 	{
