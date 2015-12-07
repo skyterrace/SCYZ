@@ -9,7 +9,7 @@ void Key_Config()
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOC|RCC_APB2Periph_GPIOD, ENABLE);	
 	
   /* K3 配置按键中断线PC3 */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12;
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4|GPIO_Pin_11|GPIO_Pin_12;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;					    //输入上拉
   GPIO_Init(GPIOC, &GPIO_InitStructure);
 	

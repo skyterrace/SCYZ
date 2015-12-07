@@ -54,7 +54,6 @@ int main(void)
 	
 	Lcd_Init();
 	Lcd_Clear(GRAY0);
-	
 	Key_Config();
 
 	//看门狗初始化
@@ -63,7 +62,7 @@ int main(void)
 // 		SetMowSpeed(0);
 // 		SetDriverSpeed(0,0);
 		//ShowStatusInfo(3,0,"Watch Dog!");
-		Gui_DrawFont_GBK32(16,6,BLUE,GRAY0,"长度：");  //显示
+		Gui_DrawFont_GBK32(16,6,BLUE,GRAY0,"watch dog");  //显示
 		//RCC_ClearFlag(); //后面RTC_Configuration里会清寄存器
 		//while(!Key_Press(KEY_OK));
 		Delay_ms(3000);
@@ -151,7 +150,7 @@ int main(void)
 			//ShowCurrentTime();
 			R1_BehaviorTimeElapse();
 		}
- 			
+		
 			//if(DEBUG_MODE)
 			//显示界面信息
 			{
@@ -159,60 +158,60 @@ int main(void)
 				switch (sR1Mower.MCU_STATUS)
 				{
 					case  R1_STOP:  //停止状态
-						st="STOP  ";
+						st="STOP   ";
 						break;
 					case R1_CHARGING: //充电状态
-						st="CHARGE";
+						st="CHARGE ";
 						break;
 					case R1_SETTING: //时间设定状态
 						st="SETTING";
 						break;
 					case R1_MANUAL: //手动控制状态
-						st="MANUAL";
+						st="MANUAL ";
 						break;
 					case R1_MOW: //割草状态
-						st="MOVING";
+						st="MOVING ";
 						break;
 					case R1_AVOID: //避障状态
-						st="AVOID ";
+						st="AVOID  ";
 						break;
 					case R1_TURN: //调头状态
-						st="TURN  ";
+						st="TURN   ";
 						break;
 					case R1_FAIL: //故障停止状态
-						st="FAIL  ";
+						st="FAIL   ";
 						break;
 					case R1_LOOK: //寻找导引线状态
-						st="HOME  ";
+						st="HOME   ";
 						break;
 					case R1_FOLLOW: //沿导线走状态
-						st="FOLLOW";
+						st="FOLLOW ";
 						break;
 					case R1_GOOUT: //沿导线走状态
-						st="GO OUT";
+						st="GO OUT ";
 						break;
 					case R1_IDLE: //沿导线走状态
 						st="IDLE  ";
 						break;
 					case R1_PREPARE: //沿导线走状态
-						st="PREPAR";
+						st="PREPAR ";
 						break;
 					default:
-						st="UNKOWN";
+						st="UNKOWN ";
 						break;
 
 				}
 				if(!R1_has_fail())
 				{
 					//ShowStatusInfo(2,0,"WORK: ");
-					Gui_DrawFont_GBK16(16,6,BLUE,GRAY0,st);  //显示
+					Gui_DrawFont_GBK32(16,6,BLUE,GRAY0,st);  //显示
 					//ShowBatteryInfo(sR1Mower.Power);
 				}
 				else
 				{
 					//ShowStatusInfo(2,0,"ERROR:");
 					//ShowStatusInfo(3,0,sR1Mower.FailInfo);
-					Gui_DrawFont_GBK16(16,6,BLUE,GRAY0,"ERROR");  //显示
+					Gui_DrawFont_GBK32(16,6,BLUE,GRAY0,"ERROR");  //显示
 				}
 				
 #ifdef DEBUG_MODE
@@ -225,20 +224,20 @@ int main(void)
 //				ShowStatusInfo(3,12,strbuff);
 
 				//ShowStatusInfo(4,0,"X:");
-				Gui_DrawFont_GBK16(16,24,BLUE,GRAY0,"X:");  //显示
+				Gui_DrawFont_GBK16(16,50,BLUE,GRAY0,"X:");  //显示
 				
 //				sR1Mower.MT_STATUS_H = sm_loc_x>>24;
 //				ShowDebugInfo(4,3,sR1Mower.MT_STATUS_H);
 //				sR1Mower.MT_STATUS_L = sm_loc_x>>16;
 //				ShowDebugInfo(4,6,sR1Mower.MT_STATUS_L);
-				//Gui_DrawFont_Num32_Int(48,24,RED,GRAY0,sm_loc_x>>16,4);	
+				Gui_DrawFont_Num32_Int(48,44,RED,GRAY0,sm_loc_x/100,4);	
 				
 				//ShowStatusInfo(4,10,"SS:");
 //				sR1Mower.SS_STATUS_H = sm_loc_x>>8;
 //				ShowDebugInfo(4,9,sR1Mower.SS_STATUS_H);
 //				sR1Mower.SS_STATUS_L = sm_loc_x&0xFF;
 //				ShowDebugInfo(4,12,sR1Mower.SS_STATUS_L);
-				Gui_DrawFont_Num32_Int(48,24,RED,GRAY0,sm_loc_x,4);	
+				//Gui_DrawFont_Num32_Int(48,44,RED,GRAY0,sm_loc_x,4);	
 				
 // 				ShowStatusInfo(5,0,"BS:");
 // 				ShowDebugInfo(5,3,sR1Mower.BS_WI_STATUS);
@@ -250,12 +249,16 @@ int main(void)
 // 				ShowDebugInfo(5,15,sR1Mower.BSStrength[1] & 0x00FF);
 // 				//ShowDebugInfo(5,15,sR1Mower.BSStrength[1]>>2 & 0x00FF);
 				//ShowStatusInfo(5,0,"Y:");
-				Gui_DrawFont_GBK16(16,40,BLUE,GRAY0,"Y:");  //显示
+				Gui_DrawFont_GBK16(16,86,BLUE,GRAY0,"Y:");  //显示
 //				ShowDebugInfo(5,3,sm_loc_y>>24);
 //				ShowDebugInfo(5,6,sm_loc_y>>16);
 //				ShowDebugInfo(5,9,sm_loc_y>>8);
 //				ShowDebugInfo(5,12,sm_loc_y & 0xFF);
-				Gui_DrawFont_Num32_Int(48,40,RED,GRAY0,sm_loc_y,4);	
+				Gui_DrawFont_Num32_Int(48,80,RED,GRAY0,sm_loc_y/100,4);	
+				
+				if(sR1Mower.TurnDir == 1) Gui_DrawFont_GBK16(190,96,BLUE,GRAY0,"Y1");
+				else if(sR1Mower.TurnDir == 2) Gui_DrawFont_GBK16(190,96,BLUE,GRAY0,"Y2");
+				else Gui_DrawFont_GBK16(190,96,BLUE,GRAY0,"  ");
 
 // 				ShowStatusInfo(6,0,"T:");
 // 				ShowDebugInfo(6,2,sR1Mower.Temperature);
@@ -275,9 +278,9 @@ int main(void)
 //				ShowStatusInfo(6,0,"Box:");
 //				ShowDebugInfo(6,6,sm_box_loc_x);
 //				ShowDebugInfo(6,10,sm_box_loc_y);
-					Gui_DrawFont_GBK16(16,56,BLUE,GRAY0,"BOX:");  //显示
-					Gui_DrawFont_Num32_Int(80,56,RED,GRAY0,sm_box_loc_x,2);	
-					Gui_DrawFont_Num32_Int(144,56,RED,GRAY0,sm_box_loc_y,2);	
+					Gui_DrawFont_GBK16(16,122,BLUE,GRAY0,"BOX:");  //显示
+					Gui_DrawFont_Num32_Int(48,116,RED,GRAY0,sm_box_loc_x,2);	
+					Gui_DrawFont_Num32_Int(164,116,RED,GRAY0,sm_box_loc_y,2);	
 					
 				
 #endif

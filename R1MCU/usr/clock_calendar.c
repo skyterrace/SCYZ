@@ -30,8 +30,8 @@ BKP_DR11~24保存周一到周五的工作时间（起始时分和结束时分）
 #include "eeprom.h"
 #include "R1DEF.h"
 
-//#define RTCClockSource_LSI   /* 用内置的32K 时钟晶振源 */
-#define RTCClockSource_LSE   /* 用外置的32.768K 时钟晶振源 */
+#define RTCClockSource_LSI   /* 用内置的32K 时钟晶振源 */
+//#define RTCClockSource_LSE   /* 用外置的32.768K 时钟晶振源 */
 
 /* Private variables--------------------------------------------------------- */
 // uint8_t ClockSource;

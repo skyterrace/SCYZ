@@ -118,13 +118,14 @@ bool R1_has_fail(void)
 
 bool R1_is_working_time(void)  //用到clock_calendar.c中的函数和变量定义
 {
-	uint16_t nTime,nStart,nEnd,nWeekDay;
-	nWeekDay = WeekDay(s_DateStructVar.Year,s_DateStructVar.Month,s_DateStructVar.Day);
-	nTime = (s_TimeStructVar.HourHigh*10+s_TimeStructVar.HourLow)*60+(s_TimeStructVar.MinHigh*10+s_TimeStructVar.MinLow);
-	nStart = sR1Mower.sWorkTime[nWeekDay-1].StartHour*60+sR1Mower.sWorkTime[nWeekDay-1].StartMin;
-	nEnd = sR1Mower.sWorkTime[nWeekDay-1].EndHour*60+sR1Mower.sWorkTime[nWeekDay-1].EndMin;
-	if(nTime > nStart && nTime < nEnd)	return TRUE;
-	else return FALSE;
+	return TRUE;
+//	uint16_t nTime,nStart,nEnd,nWeekDay;
+//	nWeekDay = WeekDay(s_DateStructVar.Year,s_DateStructVar.Month,s_DateStructVar.Day);
+//	nTime = (s_TimeStructVar.HourHigh*10+s_TimeStructVar.HourLow)*60+(s_TimeStructVar.MinHigh*10+s_TimeStructVar.MinLow);
+//	nStart = sR1Mower.sWorkTime[nWeekDay-1].StartHour*60+sR1Mower.sWorkTime[nWeekDay-1].StartMin;
+//	nEnd = sR1Mower.sWorkTime[nWeekDay-1].EndHour*60+sR1Mower.sWorkTime[nWeekDay-1].EndMin;
+//	if(nTime > nStart && nTime < nEnd)	return TRUE;
+//	else return FALSE;
 }
 
 bool R1_is_go_home()

@@ -550,10 +550,10 @@ void Gui_SetParam(void)
 					sR1Mower.sRunParam.BsStrenghL = box_y_count_temp;
 					break;
 				case 2:
-					sR1Mower.sRunParam.KP1 = box_x_len_temp / 200;
+					sR1Mower.sRunParam.KP1 = box_x_len_temp / 200.0;
 					break;
 				case 3:
-					sR1Mower.sRunParam.KD1 = box_y_len_temp / 200;
+					sR1Mower.sRunParam.KD1 = box_y_len_temp / 200.0;
 					break;
 				default:
 					break;
@@ -618,11 +618,11 @@ void Gui_SetParam(void)
 					if(box_y_count_temp > 99) box_y_count_temp = 0;
 					break;
 				case 2:
-					box_x_len_temp++;
+					box_x_len_temp+=2;
 					if(box_x_len_temp > 500)box_x_len_temp = 10;
 					break;
 				case 3:
-					box_y_len_temp++;
+					box_y_len_temp+=2;
 					if(box_y_len_temp > 500) box_y_len_temp = 10;
 					break;
 				
@@ -637,26 +637,28 @@ void Gui_SetParam(void)
 			switch(set_index)
 			{
 				case 0:
-					Gui_DrawFont_GBK16(100,32,BLUE,GRAY0,"BOX X COUNT");
-					Gui_DrawFont_Num32_Int(48,48,RED,GRAY0,box_x_count_temp,2);	
+					Gui_DrawFont_GBK16(100,46,BLUE,GRAY0,"BOX X COUNT  ");
+					Gui_DrawFont_Num32_Int(98,78,RED,GRAY0,box_x_count_temp,3);	
 					break;
 				case 1:
-					Gui_DrawFont_GBK16(100,32,BLUE,GRAY0,"BOX Y COUNT");
-					Gui_DrawFont_Num32_Int(48,48,RED,GRAY0,box_y_count_temp,2);	
+					Gui_DrawFont_GBK16(100,46,BLUE,GRAY0,"BOX Y COUNT  ");
+					Gui_DrawFont_Num32_Int(98,78,RED,GRAY0,box_y_count_temp,3);	
 					break;
 				case 2:
-					Gui_DrawFont_GBK16(100,32,BLUE,GRAY0,"BOX X LENGTH");
-					Gui_DrawFont_Num32_Int(48,48,RED,GRAY0,box_x_len_temp,3);	
+					Gui_DrawFont_GBK16(100,46,BLUE,GRAY0,"BOX X LENGTH ");
+					Gui_DrawFont_Num32_Int(98,78,RED,GRAY0,box_x_len_temp,3);	
 					break;
 				case 3:
-					Gui_DrawFont_GBK16(100,32,BLUE,GRAY0,"BOX Y LENGTH");
-					Gui_DrawFont_Num32_Int(48,48,RED,GRAY0,box_y_len_temp,3);	
+					Gui_DrawFont_GBK16(100,46,BLUE,GRAY0,"BOX Y LENGTH ");
+					Gui_DrawFont_Num32_Int(98,78,RED,GRAY0,box_y_len_temp,3);	
 					break;
 				
 				default:
 					
 					break;
 			}
+			Gui_DrawFont_GBK16(16,200,BLUE,GRAY0,"OK");
+			Gui_DrawFont_GBK16(216,200,BLUE,GRAY0,"CANCEL");
 
 			refresh = 0;
 		}
